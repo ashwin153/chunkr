@@ -1,10 +1,10 @@
-/target
-/bin
+/target/
+/bin/
 .project
 .classpath
 .settings
 
-.log
-.aux
-.out
-.toc
+*.log
+*.aux
+*.out
+*.toc
