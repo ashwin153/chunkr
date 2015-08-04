@@ -31,6 +31,7 @@ Decompression: bits -> decoded expression -> evaluator -> unchunker -> original 
 - In Progress: Develop alternative revenue streams
 - In Progress: Develop strong accounting and financial systems; excellent companies have excellent books
 - In Progress: Develop marketing materials/logos/websites/sales decks/advertisements/public relations
+- In Progress: Determine equity split (http://www.geekwire.com/2011/wrong-answer-5050-calculating-cofounder-equity-split/)
 
 # Contributors
 - Ashwin Madavan (Founder/CEO; Lead Developer)
