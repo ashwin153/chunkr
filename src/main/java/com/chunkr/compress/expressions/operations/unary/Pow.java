@@ -22,6 +22,11 @@ public class Pow extends Operation {
 	}
 	
 	@Override
+	public Pow copy() {
+		return new Pow(get(0).copy(), _pow);
+	}
+	
+	@Override
 	public String toString() {
 		return "pow" + _pow + "(x)";
 	}

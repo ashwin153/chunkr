@@ -32,8 +32,13 @@ public class Expression implements Serializable {
 	 * @return result
 	 */
 	public BigDecimal eval(BigDecimal x) {
-		_var.set(x);
-		return _root.eval();
+		// Because multiple expressions can reuse the same variables; we need to
+		// make evaluations synchronized to ensure that evaluations are
+		// thread-safe.
+		synchronized(_var) {
+			_var.set(x);
+			return _root.eval();
+		}
 	}
 	
 	@Override

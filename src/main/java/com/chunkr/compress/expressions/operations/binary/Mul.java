@@ -19,6 +19,11 @@ public class Mul extends Operation {
 	}
 	
 	@Override
+	public Mul copy() {
+		return new Mul(get(0).copy(), get(1).copy());
+	}
+	
+	@Override
 	public String toString() {
 		return "(" + get(0) + ") * (" + get(1) + ")";
 	}

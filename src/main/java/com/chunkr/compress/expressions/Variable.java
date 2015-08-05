@@ -42,6 +42,11 @@ public class Variable implements Evaluable {
 	public BigDecimal eval() {
 		return _value;
 	}
+	
+	@Override
+	public Variable copy() {
+		return this;
+	}
 
 	@Override
 	public String toString() {

@@ -19,6 +19,11 @@ public class Add extends Operation {
 	}
 	
 	@Override
+	public Add copy() {
+		return new Add(get(0).copy(), get(1).copy());
+	}
+	
+	@Override
 	public String toString() {
 		return "(" + get(0) + ") + (" + get(1) + ")";
 	}

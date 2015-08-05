@@ -19,6 +19,11 @@ public class Abs extends Operation {
 	}
 	
 	@Override
+	public Abs copy() {
+		return new Abs(get(0).copy());
+	}
+	
+	@Override
 	public String toString() {
 		return "abs(x)";
 	}

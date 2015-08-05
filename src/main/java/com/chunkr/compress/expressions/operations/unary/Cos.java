@@ -18,6 +18,11 @@ public class Cos extends Operation {
 		BigDecimal mod = get(0).eval().remainder(BigDecimal.valueOf(2 * Math.PI));
 		return BigDecimal.valueOf(Math.cos(mod.doubleValue()));
 	}
+	
+	@Override
+	public Cos copy() {
+		return new Cos(get(0).copy());
+	}
 
 	@Override
 	public String toString() {

@@ -19,6 +19,11 @@ public class Neg extends Operation {
 	}
 	
 	@Override
+	public Neg copy() {
+		return new Neg(get(0).copy());
+	}
+	
+	@Override
 	public String toString() {
 		return "neg(x)";
 	}

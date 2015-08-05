@@ -20,5 +20,10 @@ public class Constant extends BigDecimal implements Evaluable {
 	public BigDecimal eval() {
 		return this;
 	}
-
+	
+	@Override
+	public Constant copy() {
+		return this;
+	}
+	
 }

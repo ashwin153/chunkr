@@ -20,4 +20,13 @@ public interface Evaluable extends Serializable {
 	 */
 	public BigDecimal eval();
 	
+	/**
+	 * Returns a new copy of this evaluable; copies can be deep or shallow.
+	 * (e.x., it is impossible to deep copy a variable; but it is possible to
+	 * deep copy an operation)
+	 * 
+	 * @return copy
+	 */
+	public Evaluable copy();
+	
 }
