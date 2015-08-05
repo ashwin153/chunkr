@@ -9,9 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.chunkr.compress.Chunker;
-import com.chunkr.compress.chunkers.ModifiedChunker;
-
 @RunWith(MockitoJUnitRunner.class)
 public class ChunkerTest {
 	

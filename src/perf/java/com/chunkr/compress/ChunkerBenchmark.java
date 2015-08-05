@@ -18,7 +18,7 @@ public class ChunkerBenchmark {
 	@Param({ "5", "6", "7" })
 	private int _chunkSize;
 	
-	@Param({ "STANDARD", "MODIFIED" })
+	@Param
 	private Method _method;
 	
 	private Chunker _chunker;
@@ -46,7 +46,7 @@ public class ChunkerBenchmark {
 	@BeforeExperiment
 	public void setUp() throws Exception {
 		_chunker = _method.getChunker(_chunkSize);
-		_bits = new boolean[_chunkSize * 10];
+		_bits = new boolean[_chunkSize * 10000];
 		for(int i = 0; i < _bits.length; i++)
 			_bits[i] = (Math.random() < 0.50) ? true : false;
 		_chunks = _chunker.chunk(_bits);

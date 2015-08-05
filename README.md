@@ -20,7 +20,6 @@ Decompression: bits -> decoded expression -> evaluator -> unchunker -> original 
 - In Progress: Novel method of determining optimal bit weights for unchunking (Avinash)
 - In Progress: Novel method of creating a browser backed by the compression; all media requests/non-essential data is compressed down, less data use/bandwidth
 - In Progress: Novel method of using the expression notation in various ways such as a "sound" version of a file
-- In Progress: Novel method of representing floating point numbers as functions
 - In Progress: Novel method of using multiple curves to represent a data set; the average of the curves is taken when evaluating the function to gain a more precise answer
 - In Progress: Novel method of performing digital media transfer; you could send massive files over Bluetooth
 
