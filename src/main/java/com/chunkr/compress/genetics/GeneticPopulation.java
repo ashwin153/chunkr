@@ -14,7 +14,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class GeneticPopulation<T extends GeneticChromosome<T>> {
 
-	private GeneticAlgorithm<T> _algorithm;
+	private GeneticAlgorithm<T, ?> _algorithm;
 	private List<T> _chromosomes;
 	
 	/**
@@ -25,7 +25,7 @@ public class GeneticPopulation<T extends GeneticChromosome<T>> {
 	 * @param algorithm
 	 * @param chromosomes
 	 */
-	public GeneticPopulation(GeneticAlgorithm<T> algorithm, List<T> chromosomes) { 
+	public GeneticPopulation(GeneticAlgorithm<T, ?> algorithm, List<T> chromosomes) { 
 		_algorithm = algorithm;
 	
 		// Sort the list of chromosomes by their fitness; utilizes an executor
