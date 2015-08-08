@@ -1,10 +1,11 @@
 package com.chunkr.compress;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Stack;
 
-import com.chunkr.compress.expressions.Evaluable;
-import com.chunkr.compress.expressions.Variable;
+import com.chunkr.compress.expressions.Operation;
+import com.chunkr.compress.expressions.operations.nullary.Variable;
 
 /**
  * Expressions are essentially functions that can be evaluated at any point.
@@ -12,38 +13,32 @@ import com.chunkr.compress.expressions.Variable;
  * 
  * @author ashwin
  */
-public class Expression implements Serializable {
+public class Expression {
 	
-	private static final long serialVersionUID = 6069395250411328800L;
+	private List<Operation> _operations;
+	private Variable _variable;
 	
-	private Evaluable _root;
-	private Variable _var;
-
-	public Expression(Evaluable root, Variable var) {
-		_root = root;
-		_var = var;
+	public Expression(Variable variable, List<Operation> operations) {
+		_variable = variable;
+		_operations = operations;
 	}
 	
-	/**
-	 * Evaluates the expression at the given coordinate. Note: this operation
-	 * ought to be thread safe.
-	 * 
-	 * @param x
-	 * @return result
-	 */
 	public BigDecimal eval(BigDecimal x) {
 		// Because multiple expressions can reuse the same variables; we need to
 		// make evaluations synchronized to ensure that evaluations are
 		// thread-safe.
-		synchronized(_var) {
-			_var.set(x);
-			return _root.eval();
+		synchronized(_variable) {
+			_variable.set(x);
+			
+			Stack<BigDecimal> stack = new Stack<BigDecimal>();
+			for(int i = 0; i < _operations.size(); i++) {
+				BigDecimal[] operands = new BigDecimal[_operations.get(i).arity()];
+				for(int j = 0; j < operands.length; j++)
+					operands[j] = stack.pop();
+				stack.push(_operations.get(i).eval(operands));
+			}
+			
+			return stack.pop();
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return _root.toString();
-	}
-	
 }
