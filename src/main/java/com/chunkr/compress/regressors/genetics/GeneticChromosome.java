@@ -1,4 +1,4 @@
-package com.chunkr.compress.genetics;
+package com.chunkr.compress.regressors.genetics;
 
 public interface GeneticChromosome<T extends GeneticChromosome<T>> {
 	

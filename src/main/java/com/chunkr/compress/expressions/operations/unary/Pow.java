@@ -8,6 +8,12 @@ public class Pow extends UnaryOperation {
 	
 	private int _pow;
 
+	/**
+	 * Constructs a power function of the specified degree. The degree must be a
+	 * non-negative integer to ensure that it is valid over the real numbers.
+	 * 
+	 * @param pow
+	 */
 	public Pow(int pow) {
 		_pow = pow;
 	}

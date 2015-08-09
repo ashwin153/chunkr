@@ -1,4 +1,4 @@
-package com.chunkr.compress.genetics;
+package com.chunkr.compress.regressors.genetics;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

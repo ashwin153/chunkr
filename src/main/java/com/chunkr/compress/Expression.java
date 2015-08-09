@@ -8,8 +8,10 @@ import com.chunkr.compress.expressions.Operation;
 import com.chunkr.compress.expressions.operations.nullary.Variable;
 
 /**
- * Expressions are essentially functions that can be evaluated at any point.
- * Expressions are the building block of all mathematical/statistical models.
+ * Expressions are functions that can be evaluated at any point. Expressions are
+ * the building block of all mathematical/statistical models. Expressions store
+ * operations in postfix order (reverse polish notation), and evaluate them
+ * using a stack.
  * 
  * @author ashwin
  */
@@ -23,6 +25,13 @@ public class Expression {
 		_operations = operations;
 	}
 	
+	/**
+	 * Evaluates the expression at the specified coordinate. This operation is
+	 * thread-safe.
+	 * 
+	 * @param x
+	 * @return
+	 */
 	public BigDecimal eval(BigDecimal x) {
 		// Because multiple expressions can reuse the same variables; we need to
 		// make evaluations synchronized to ensure that evaluations are
@@ -40,5 +49,10 @@ public class Expression {
 			
 			return stack.pop();
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return _operations.toString();
 	}
 }
