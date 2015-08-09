@@ -24,8 +24,8 @@ public interface Operation {
 	/**
 	 * Evaluates the expression over the specified operands.
 	 * 
-	 * @param operands
-	 * @return
+	 * @param operands inputs
+	 * @return output
 	 */
 	public BigDecimal eval(BigDecimal... operands);
 }

@@ -29,8 +29,8 @@ public class Expression {
 	 * Evaluates the expression at the specified coordinate. This operation is
 	 * thread-safe.
 	 * 
-	 * @param x
-	 * @return
+	 * @param x input
+	 * @return output
 	 */
 	public BigDecimal eval(BigDecimal x) {
 		// Because multiple expressions can reuse the same variables; we need to

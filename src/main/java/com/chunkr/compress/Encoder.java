@@ -8,8 +8,8 @@ public interface Encoder {
 	/**
 	 * Deserializes the stream back into an expression.
 	 * 
-	 * @param ois
-	 * @return
+	 * @param stream input data
+	 * @return deserialized expression
 	 */
 	public Expression read(InputStream stream);
 	
@@ -18,8 +18,8 @@ public interface Encoder {
 	 * wrapped into other streams (e.x., FileOutputStream) to manipulate the
 	 * data.
 	 * 
-	 * @param expression
-	 * @return
+	 * @param expression input data
+	 * @param stream output stream
 	 */
 	public void write(Expression expression, OutputStream stream);
 
