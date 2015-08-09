@@ -8,6 +8,14 @@ import com.google.caliper.Param;
 import com.google.caliper.api.VmOptions;
 import com.google.caliper.runner.CaliperMain;
 
+/**
+ * This performance benchmarks tests the runtime performance and memory
+ * allocation of each method of chunking at various chunk sizes over a
+ * randomized sequence of bits.
+ * 
+ * @author ashwin
+ * 
+ */
 @VmOptions("-server")
 public class ChunkerBenchmark {
 	
