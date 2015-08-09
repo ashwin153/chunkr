@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 
 import com.chunkr.compress.regressors.FourierRegressor;
 import com.chunkr.compress.regressors.GeneticRegressor;
-import com.chunkr.compress.regressors.LeastSquaresRegressor;
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
@@ -29,13 +28,6 @@ public class RegressorBenchmark {
 	private Point2D[] _data;
 	
 	public enum Method {
-		
-		LEAST_SQUARES {
-			@Override
-			public Regressor getRegressor() {
-				return new LeastSquaresRegressor();
-			}
-		},
 		
 		FOURIER {
 			@Override

@@ -9,8 +9,7 @@ public class FourierRegressor implements Regressor {
 
 	@Override
 	public Expression fit(Point2D[] data) {
-		// TODO Add Fourier Regression
 		return null;
 	}
-
+	
 }

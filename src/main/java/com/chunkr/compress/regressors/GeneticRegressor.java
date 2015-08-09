@@ -9,7 +9,6 @@ public class GeneticRegressor implements Regressor {
 
 	@Override
 	public Expression fit(Point2D[] data) {
-		// TODO Add Genetic Regression
 		return null;
 	}
 

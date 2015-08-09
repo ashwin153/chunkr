@@ -12,9 +12,10 @@ Decompression: bits -> decoded expression -> evaluator -> unchunker -> original 
 
 ## Innovations
 - Novel method of chunking bits to maintain precision using imprecise mathematical calculations (Ashwin)
-- Novel method of performing genetic regression (Ashwin)
+- Novel method of encoding bits to minimize space; particularly, a dynamic encoding scheme (operations that appear more frequently in the expression can have shorter codes). Essentially zipping the encoding. (Ashwin)
+- Novel method of performing genetic regression; refactor in progress (Ashwin)
+
 - In Progress: Novel method of performing distributed function evaluations; essentially, streaming the function evaluations so that content can be delivered faster.
-- In Progress: Novel method of encoding bits to minimize space; particularly, a dynamic encoding scheme (operations that appear more frequently in the expression can have shorter codes). Essentially zipping the encoding.
 - In Progress: Novel method of performing operations directly on regressed expressions; you could do integral check sums, faster database (better clustering, faster retrieval times, easier to exploit locality), implications for caching you could load similar functions into cache
 - In Progress: Novel method of decoding expressions to form better and better approximations of the function over time. As more of the function is decoded, the approximation gets better and better
 - In Progress: Novel method of determining optimal bit weights for unchunking (Avinash)
@@ -34,4 +35,3 @@ Decompression: bits -> decoded expression -> evaluator -> unchunker -> original 
 
 # Contributors
 - Ashwin Madavan (Founder/CEO; Lead Developer)
-- Avinash Madavan (Founder/CTO)
