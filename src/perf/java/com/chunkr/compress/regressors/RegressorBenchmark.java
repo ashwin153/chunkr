@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.regressors;
 
 import com.chunkr.compress.regressors.FourierRegressor;
 import com.chunkr.compress.regressors.GeneticRegressor;

@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.expressions;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.chunkers;
 
 import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.compress.chunkers.ModifiedChunker;

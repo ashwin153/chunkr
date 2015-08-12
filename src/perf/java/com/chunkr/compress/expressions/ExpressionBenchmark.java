@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.expressions;
 
 import com.google.caliper.Benchmark;
 import com.google.caliper.api.VmOptions;
