@@ -1,6 +1,6 @@
-package com.chunkr.compress;
+package com.chunkr.compress.regressors;
 
-import java.awt.geom.Point2D;
+import com.chunkr.compress.expressions.Expression;
 
 /**
  * Regressors are responsible for fitting a smooth curve (Expression) to a set
@@ -18,6 +18,6 @@ public interface Regressor {
 	 * @param data
 	 * @return smooth curve
 	 */
-	public Expression fit(Point2D[] data);
+	public Expression fit(int[] chunks);
 	
 }

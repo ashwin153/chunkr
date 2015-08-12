@@ -1,10 +1,8 @@
 package com.chunkr.compress;
 
-import java.awt.geom.Point2D;
-
 import com.chunkr.compress.regressors.FourierRegressor;
 import com.chunkr.compress.regressors.GeneticRegressor;
-import com.google.caliper.BeforeExperiment;
+import com.chunkr.compress.regressors.Regressor;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.caliper.api.VmOptions;
@@ -25,7 +23,7 @@ public class RegressorBenchmark {
 	private Method _method;
 	
 	private Regressor _regressor;
-	private Point2D[] _data;
+	private int[] _data;
 	
 	public enum Method {
 		
@@ -44,15 +42,6 @@ public class RegressorBenchmark {
 		};
 		
 		abstract Regressor getRegressor();
-	}
-
-	@BeforeExperiment
-	public void setUp() throws Exception {
-		_regressor = _method.getRegressor();
-		_data = new Point2D[1000];
-		
-		for(int i = 0; i < _data.length; i++)
-			_data[i] = new Point2D.Double(i, Math.random() * 32);
 	}
 	
 	@Benchmark

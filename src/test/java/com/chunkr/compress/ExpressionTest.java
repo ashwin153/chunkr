@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.chunkr.compress.expressions.Expression;
 import com.chunkr.compress.expressions.Operation;
 import com.chunkr.compress.expressions.operations.binary.Add;
 import com.chunkr.compress.expressions.operations.binary.Mul;

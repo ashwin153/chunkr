@@ -1,14 +1,14 @@
 package com.chunkr.compress.regressors;
 
-import java.awt.geom.Point2D;
-
-import com.chunkr.compress.Expression;
-import com.chunkr.compress.Regressor;
+import com.chunkr.compress.expressions.Expression;
 
 public class FourierRegressor implements Regressor {
 
 	@Override
-	public Expression fit(Point2D[] data) {
+	public Expression fit(int[] chunks) {
+		// Step 1: Perform FFT on input data
+		// Step 2: Remove high frequency terms
+		// Step 3: Construct an expression
 		return null;
 	}
 	

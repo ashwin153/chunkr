@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import com.chunkr.compress.expressions.operations.binary.Add;
+
 public class AddTest {
 	
 	@Test

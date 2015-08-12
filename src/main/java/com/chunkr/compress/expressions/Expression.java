@@ -1,10 +1,9 @@
-package com.chunkr.compress;
+package com.chunkr.compress.expressions;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Stack;
 
-import com.chunkr.compress.expressions.Operation;
 import com.chunkr.compress.expressions.operations.nullary.Variable;
 
 /**
@@ -23,6 +22,14 @@ public class Expression {
 	public Expression(Variable variable, List<Operation> operations) {
 		_variable = variable;
 		_operations = operations;
+	}
+	
+	public Variable getVariable() {
+		return _variable;
+	}
+	
+	public List<Operation> getOperations() {
+		return _operations;
 	}
 	
 	/**

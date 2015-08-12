@@ -1,7 +1,4 @@
 package com.chunkr.compress;
-
-import com.chunkr.compress.encoders.KryoEncoder;
-import com.google.caliper.Param;
 import com.google.caliper.api.VmOptions;
 
 /**
@@ -17,19 +14,5 @@ import com.google.caliper.api.VmOptions;
 @VmOptions("-server")
 public class EncoderBenchmark {
 
-	@Param
-	private Method _method;
-		
-	public enum Method {
-		
-		KRYO {
-			@Override
-			public Encoder getEncoder() {
-				return new KryoEncoder();
-			}
-		};
-		
-		abstract public Encoder getEncoder();
-	}
 	
 }

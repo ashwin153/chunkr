@@ -12,7 +12,7 @@ import com.chunkr.compress.expressions.Operation;
 public abstract class NullaryOperation implements Operation {
 
 	@Override
-	public int arity() {
+	public final int arity() {
 		return 0;
 	}
 	

@@ -5,9 +5,14 @@ import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.chunkr.compress.chunkers.Chunker;
+import com.chunkr.compress.chunkers.ModifiedChunker;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChunkerTest {

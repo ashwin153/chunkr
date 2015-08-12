@@ -13,7 +13,7 @@ import com.chunkr.compress.expressions.Operation;
 public abstract class UnaryOperation implements Operation {
 
 	@Override
-	public int arity() {
+	public final int arity() {
 		return 1;
 	}
 	
