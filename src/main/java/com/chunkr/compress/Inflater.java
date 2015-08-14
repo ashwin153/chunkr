@@ -10,9 +10,15 @@ import com.chunkr.compress.expressions.Expression;
 
 public class Inflater {
 	
+	private Encoder _encoder;
+	
+	public Inflater() {
+		_encoder = new Encoder();
+	}
+	
 	public boolean[] inflate(InputStream input) {
 		// Step 1: Decode the input stream into an archive
-		Archive archive = new Encoder().read(input);
+		Archive archive = _encoder.read(input);
 		
 		// Step 2: Evaluate the input stream at each point in the file
 		int[] chunks = new int[archive.getLength()];

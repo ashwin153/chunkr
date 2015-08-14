@@ -9,25 +9,28 @@ import com.chunkr.compress.regressors.Regressor;
 
 public class Deflater {
 
+	private Chunker _chunker;
 	private Regressor _regressor;
+	private Encoder _encoder;
 	
-	public Deflater(Regressor regressor) {
+	public Deflater(int chunkSize, Regressor regressor) {
+		_chunker = new ModifiedChunker(chunkSize);
 		_regressor = regressor;
+		_encoder = new Encoder();
 	}
 	
-	public void deflate(int chunkSize, boolean[] bits, OutputStream output) {
+	public void deflate(boolean[] bits, OutputStream output) {
 		// Step 1: Chunk the input bits using modified chunking
-		Chunker chunker = new ModifiedChunker(chunkSize);
-		int[] chunks = chunker.chunk(bits);
+		int[] chunks = _chunker.chunk(bits);
 
 		// Step 2: Regress the chunked values into an expression
 		Expression expression = _regressor.fit(chunks);
 
 		// Step 3: Create an archive out of the compressed expression
-		Archive archive = new Archive(chunkSize, chunks.length, expression);
+		Archive archive = new Archive(_chunker.getChunkSize(), chunks.length, expression);
 
 		// Step 4: Encode the archive into the specified output stream
-		new Encoder().write(archive, output);
+		_encoder.write(archive, output);
 	}
 	
 }

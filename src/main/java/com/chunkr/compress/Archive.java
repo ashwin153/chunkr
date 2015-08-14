@@ -4,9 +4,11 @@ import com.chunkr.compress.expressions.Expression;
 
 
 /**
+ * This class represents a compressed archive. Archives contain decompression
+ * parameters (e.x., chunk size, length, etc.) and an evaluable expression.
+ * Archives are immutable.
  * 
  * @author ashwin
- *
  */
 public class Archive {
 
