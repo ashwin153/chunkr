@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.chunkr.compress.expressions.operations.unary.Abs;
-
 public class AbsTest {
+	
+	@Test
+	public void testArity() {
+		assertEquals(1, new Abs().arity());
+	}
 	
 	@Test
 	public void testEval() {

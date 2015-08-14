@@ -6,9 +6,13 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.chunkr.compress.expressions.operations.unary.Pow;
-
 public class PowTest {
+	
+	@Test
+	public void testArity() {
+		assertEquals(1, new Pow(1).arity());
+		assertEquals(1, new Pow(2).arity());
+	}
 	
 	@Test
 	public void testEval() {

@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.chunkr.compress.expressions.operations.binary.Mul;
-
 public class MulTest {
+	
+	@Test
+	public void testArity() {
+		assertEquals(2, new Mul().arity());
+	}
 	
 	@Test
 	public void testEval() {

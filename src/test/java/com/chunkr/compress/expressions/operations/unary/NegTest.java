@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.chunkr.compress.expressions.operations.unary.Neg;
-
 public class NegTest {
+	
+	@Test
+	public void testArity() {
+		assertEquals(1, new Neg().arity());
+	}
 	
 	@Test
 	public void testEval() {
