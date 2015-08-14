@@ -7,11 +7,6 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 public class SinTest {
-
-	@Test
-	public void testArity() {
-		assertEquals(1, new Sin().arity());
-	}
 	
 	@Test
 	public void testEval() {

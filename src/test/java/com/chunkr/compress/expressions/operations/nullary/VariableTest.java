@@ -7,11 +7,6 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 public class VariableTest {
-
-	@Test
-	public void testArity() {
-		assertEquals(0, new Variable("x").arity());
-	}
 	
 	@Test
 	public void testEval() {
