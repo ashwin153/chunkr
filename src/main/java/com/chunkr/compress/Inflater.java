@@ -4,8 +4,6 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import com.chunkr.compress.chunkers.Chunker;
-import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.expressions.Expression;
 
 public class Inflater {
@@ -30,8 +28,7 @@ public class Inflater {
 		}
 		
 		// Step 3: Decode and return the binary versions of the chunks
-		Chunker chunker = new ModifiedChunker(archive.getChunkSize());
-		return chunker.unchunk(chunks);
+		return archive.getChunker().unchunk(chunks);
 	}
 	
 }

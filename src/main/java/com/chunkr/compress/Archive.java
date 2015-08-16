@@ -1,5 +1,6 @@
 package com.chunkr.compress;
 
+import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.compress.expressions.Expression;
 
 
@@ -12,25 +13,26 @@ import com.chunkr.compress.expressions.Expression;
  */
 public class Archive {
 
-	private int _chunkSize, _length;
+	private Chunker _chunker;
+	private int _length;
 	private Expression _expression;
 	
-	public Archive(int chunkSize, int length, Expression expression) {
-		_chunkSize = chunkSize;
+	public Archive(Chunker chunker, Expression expression, int length) {
+		_chunker = chunker;
 		_length = length;
 		_expression = expression;
 	}
 	
-	public int getChunkSize() {
-		return _chunkSize;
-	}
-	
-	public int getLength() {
-		return _length;
+	public Chunker getChunker() {
+		return _chunker;
 	}
 	
 	public Expression getExpression() {
 		return _expression;
+	}
+	
+	public int getLength() {
+		return _length;
 	}
 	
 }
