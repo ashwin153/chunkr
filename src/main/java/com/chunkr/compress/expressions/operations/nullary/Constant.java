@@ -8,8 +8,8 @@ public class Constant extends NullaryOperation {
 	
 	private BigDecimal _value;
 	
-	public Constant(double low, double high) {
-		_value = BigDecimal.valueOf(Math.random() * (high - low) + low);
+	public Constant(double value) {
+		_value = BigDecimal.valueOf(value);
 	}
 	
 	public Constant(BigDecimal value) {
