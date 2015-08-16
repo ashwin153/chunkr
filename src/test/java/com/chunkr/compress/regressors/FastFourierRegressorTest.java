@@ -2,7 +2,7 @@ package com.chunkr.compress.regressors;
 
 import org.junit.Test;
 
-public class LeastSquaresRegressorTest {
+public class FastFourierRegressorTest {
 
 	@Test
 	public void testFit() {

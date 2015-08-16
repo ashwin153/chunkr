@@ -8,8 +8,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.chunkr.compress.expressions.Expression;
-import com.chunkr.compress.expressions.Operation;
 import com.chunkr.compress.expressions.operations.binary.Add;
 import com.chunkr.compress.expressions.operations.binary.Mul;
 import com.chunkr.compress.expressions.operations.nullary.Constant;
@@ -18,7 +16,7 @@ import com.chunkr.compress.expressions.operations.nullary.Variable;
 public class ExpressionTest {
 
 	@Test
-	public void testSampleExpression() {
+	public void testEval() {
 		Variable var = new Variable("x");
 		
 		List<Operation> operations = Arrays.asList(

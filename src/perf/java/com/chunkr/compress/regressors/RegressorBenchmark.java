@@ -1,6 +1,6 @@
 package com.chunkr.compress.regressors;
 
-import com.chunkr.compress.regressors.FourierRegressor;
+import com.chunkr.compress.regressors.FastFourierRegressor;
 import com.chunkr.compress.regressors.GeneticRegressor;
 import com.chunkr.compress.regressors.Regressor;
 import com.google.caliper.Benchmark;
@@ -27,10 +27,24 @@ public class RegressorBenchmark {
 	
 	public enum Method {
 		
-		FOURIER {
+		FAST_FOURIER {
 			@Override
 			public Regressor getRegressor() {
-				return new FourierRegressor();
+				return new FastFourierRegressor();
+			}
+		},
+		
+		DISCRETE_COSINE {
+			@Override
+			public Regressor getRegressor() {
+				return new FastFourierRegressor();
+			}
+		},
+		
+		LEAST_SQUARES {
+			@Override
+			public Regressor getRegressor() {
+				return new FastFourierRegressor();
 			}
 		},
 		

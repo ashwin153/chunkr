@@ -2,7 +2,7 @@ package com.chunkr.compress.regressors;
 
 import com.chunkr.compress.expressions.Expression;
 
-public class FourierRegressor implements Regressor {
+public class FastFourierRegressor implements Regressor {
 
 	@Override
 	public Expression fit(int[] chunks) {
