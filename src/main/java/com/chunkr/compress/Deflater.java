@@ -34,7 +34,6 @@ public class Deflater implements Runnable {
 	public void run() {
 		try {
 			// Step 1: Chunk the input bits using modified chunking
-			LOGGER.info("Chunking input bits");
 			byte[] bytes = new byte[_input.available()];
 			_input.read(bytes);
 			
@@ -45,16 +44,14 @@ public class Deflater implements Runnable {
 			int[] chunks = _chunker.chunk(bits);
 	
 			// Step 2: Regress the chunked values into an expression
-			LOGGER.info("Determining expression");
 			Expression expression = _regressor.fit(chunks);
 	
 			// Step 3: Create an archive out of the compressed expression
-			LOGGER.info("Creating archive");
 			Archive archive = new Archive(_chunker, expression, chunks.length);
 	
 			// Step 4: Encode the archive into the specified output stream
-			LOGGER.info("Encoding archive");
 			_encoder.write(archive, _output);	
+			LOGGER.info("Successfully wrote deflated bits to output stream");
 		} catch(Exception e) {
 			// Catch any exceptions and print a detailed error message + stack trace
 			LOGGER.error("Unable to deflate input data");

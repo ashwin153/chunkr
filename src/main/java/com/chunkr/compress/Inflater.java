@@ -28,11 +28,9 @@ public class Inflater implements Runnable {
 	public void run() {
 		try {
 			// Step 1: Decode the input stream into an archive
-			LOGGER.info("Loading archive from input stream");
 			Archive archive = _encoder.read(_input);
 			
 			// Step 2: Evaluate the input stream at each point in the file
-			LOGGER.info("Evaluating encoded expression");
 			int[] chunks = new int[archive.getLength()];
 			Expression expression = archive.getExpression();
 			for(int i = 0; i < chunks.length; i++) {
@@ -42,7 +40,6 @@ public class Inflater implements Runnable {
 			}
 			
 			// Step 3: Decode and covert the binary versions of the chunks into bytes
-			LOGGER.info("Unchunking integer values");
 			Chunker chunker = archive.getChunker();
 			boolean[] unchunks = chunker.unchunk(chunks);
 			
@@ -52,8 +49,8 @@ public class Inflater implements Runnable {
 					if(unchunks[i * 8 + j])
 						bytes[i] |= (128 >> j);
 			
-			LOGGER.info("Writing output bytes");
 			_output.write(bytes);
+			LOGGER.info("Successfully wrote inflated bits to output stream");
 		} catch(Exception e) {
 			// Catch any exceptions and print a detailed error message + stack trace
 			LOGGER.error("Unable to inflate input data");
