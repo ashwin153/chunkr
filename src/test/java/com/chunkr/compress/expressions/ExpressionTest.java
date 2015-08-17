@@ -1,32 +1,50 @@
 package com.chunkr.compress.expressions;
 
-import static org.junit.Assert.assertEquals;
-
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Test;
 
-import com.chunkr.compress.expressions.operations.binary.Add;
-import com.chunkr.compress.expressions.operations.binary.Mul;
-import com.chunkr.compress.expressions.operations.nullary.Constant;
 import com.chunkr.compress.expressions.operations.nullary.Variable;
 
-public class ExpressionTest {
+import edu.umd.cs.mtc.MultithreadedTestCase;
+import edu.umd.cs.mtc.TestFramework;
 
+public class ExpressionTest {
+	
 	@Test
-	public void testEval() {
-		Variable var = new Variable("x");
-		
-		List<Operation> operations = Arrays.asList(
-				new Constant(BigDecimal.valueOf(+2)),
-				new Constant(BigDecimal.valueOf(+1)),
-				var,
-				new Add(),
-				new Mul()
-		);
-		
-		assertEquals(BigDecimal.valueOf(+8), new Expression(var, operations).eval(BigDecimal.valueOf(+3)));
+	public void testEval() throws Throwable {
+		TestFramework.runOnce(new MultithreadedExpressionTest());
 	}
+	
+	@SuppressWarnings({"deprecation", "unused"})
+	private class MultithreadedExpressionTest extends MultithreadedTestCase {
+		
+		private Expression _e1, _e2;
+		
+		@Override
+		public void initialize() {
+			Variable x = new Variable("x");
+			
+			_e1 = new Expression(x, Arrays.asList((Operation) x));
+			_e2 = new Expression(x, Arrays.asList((Operation) x));
+		}
+		
+		public void thread1() {
+			assertEquals(BigDecimal.valueOf(+1), _e1.eval(BigDecimal.valueOf(+1)));
+		}
+		
+		public void thread2() {
+			assertEquals(BigDecimal.valueOf(+2), _e2.eval(BigDecimal.valueOf(+2)));
+		}
+		
+		public void thread3() {
+			assertEquals(BigDecimal.valueOf(+3), _e1.eval(BigDecimal.valueOf(+3)));
+		}
+		
+		public void thread4() {
+			assertEquals(BigDecimal.valueOf(+4), _e2.eval(BigDecimal.valueOf(+4)));
+		}
+	}
+	
 }

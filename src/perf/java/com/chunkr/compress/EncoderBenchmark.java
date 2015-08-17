@@ -1,4 +1,5 @@
 package com.chunkr.compress;
+import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.api.VmOptions;
 
@@ -15,14 +16,24 @@ import com.google.caliper.api.VmOptions;
 @VmOptions("-server")
 public class EncoderBenchmark {
 
-	@Benchmark
-	public void timeRead() {
-		
+	private Encoder _encoder;
+	private Archive _archive;
+	
+	@BeforeExperiment
+	public void setUp() throws Exception {
+		_encoder = new Encoder();
 	}
 	
 	@Benchmark
-	public void timeWrite() {
-		
+	public void timeRead(int reps) {
+		for(int i = 0; i < reps; i++)
+			_encoder.read(stream);
+	}
+	
+	@Benchmark
+	public void timeWrite(int reps) {
+		for(int i = 0; i < reps; i++)
+			_encoder.write(_archive, stream);
 	}
 	
 }

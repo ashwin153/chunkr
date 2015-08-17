@@ -16,7 +16,6 @@ public class Deflater implements Runnable {
 	private Chunker _chunker;
 	private Regressor _regressor;
 	private Encoder _encoder;
-	
 	private InputStream _input;
 	private OutputStream _output;
 	

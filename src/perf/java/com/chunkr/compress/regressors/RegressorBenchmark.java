@@ -37,14 +37,14 @@ public class RegressorBenchmark {
 		DISCRETE_COSINE {
 			@Override
 			public Regressor getRegressor() {
-				return new FastFourierRegressor();
+				return new DiscreteCosineRegressor();
 			}
 		},
 		
 		LEAST_SQUARES {
 			@Override
 			public Regressor getRegressor() {
-				return new FastFourierRegressor();
+				return new LeastSquaresRegressor(50);
 			}
 		},
 		
