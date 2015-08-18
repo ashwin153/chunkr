@@ -12,9 +12,18 @@ import edu.umd.cs.mtc.TestFramework;
 
 public class ExpressionTest {
 	
+	/**
+	 * Verifies that evaluation of expressions is thread safe. Makes use of the
+	 * MultithreadedTC library to interleave threads in various ways to ensure
+	 * that expressions are synchronized. This is an extremely important
+	 * characteristic because the deflation and inflation algorithms make heavy
+	 * use of concurrency.
+	 * 
+	 * @throws Throwable
+	 */
 	@Test
 	public void testEval() throws Throwable {
-		TestFramework.runOnce(new MultithreadedExpressionTest());
+		TestFramework.runManyTimes(new MultithreadedExpressionTest(), 5);
 	}
 	
 	@SuppressWarnings({"deprecation", "unused"})
@@ -25,7 +34,6 @@ public class ExpressionTest {
 		@Override
 		public void initialize() {
 			Variable x = new Variable("x");
-			
 			_e1 = new Expression(x, Arrays.asList((Operation) x));
 			_e2 = new Expression(x, Arrays.asList((Operation) x));
 		}
