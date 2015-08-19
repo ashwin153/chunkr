@@ -1,35 +1,43 @@
 package com.chunkr.genetics.chromosomes;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Configuration;
 
-@SuppressWarnings("serial")
-public class DoubleChromosome extends ArrayList<Double> implements Chromosome<DoubleChromosome, Double> {
+public class DoubleChromosome implements Chromosome<List<Double>, Double> {
 
-	public DoubleChromosome(Collection<Double> genes) {
-		super(genes);
+	private List<Double> _values;
+	
+	public DoubleChromosome(List<Double> values) {
+		_values = values;
 	}
 	
 	@Override
-	public DoubleChromosome crossover(DoubleChromosome mate, double rate) {
+	public List<Double> getGenome() {
+		return _values;
+	}
+	
+	@Override
+	public DoubleChromosome crossover(Chromosome<List<Double>, Double> mate, double rate) {
+		List<Double> other = mate.getGenome();
+		assert _values.size() == other.size();
+		
 		List<Double> child = new ArrayList<Double>();
-		for(int i = 0; i < size(); i++)
+		for(int i = 0; i < _values.size(); i++)
 			if(Math.random() < rate)
-				child.add((get(i) + mate.get(i)) / 2.0);
+				child.add((_values.get(i) + other.get(i)) / 2.0);
 			else
-				child.add(get(i));
+				child.add(_values.get(i));
 		return new DoubleChromosome(child);
 	}
 
 	@Override
-	public void mutate(Configuration<DoubleChromosome, Double> factory, double rate) {
-		for(int i = 0; i < size(); i++)
+	public void mutate(Configuration<List<Double>, Double> factory, double rate) {
+		for(int i = 0; i < _values.size(); i++)
 			if(Math.random() < rate)
-				set(i, factory.getRandomGene(get(i)));
+				_values.set(i, factory.getRandomGene(_values.get(i)));
 	}
 
 }

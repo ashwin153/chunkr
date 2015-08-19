@@ -2,7 +2,7 @@ package com.chunkr.genetics;
 
 import java.math.BigDecimal;
 
-public interface Configuration<C extends Chromosome<C, G>, G> {
+public interface Configuration<T, G> {
 
 	/**
 	 * Returns a reference to a callable object that in turn returns the fitness
@@ -10,7 +10,7 @@ public interface Configuration<C extends Chromosome<C, G>, G> {
 	 * 
 	 * @return
 	 */
-	public BigDecimal getFitness(C chromosome);
+	public BigDecimal getFitness(Chromosome<T, G> chromosome);
 
 	/**
 	 * Returns a randomly selected gene.
@@ -33,6 +33,6 @@ public interface Configuration<C extends Chromosome<C, G>, G> {
 	 * Returns a randomly selected chromosome.
 	 * @return
 	 */
-	public C getRandomChromosome();
+	public Chromosome<T, G> getRandomChromosome();
 	
 }

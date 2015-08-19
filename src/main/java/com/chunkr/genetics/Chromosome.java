@@ -1,8 +1,15 @@
 package com.chunkr.genetics;
 
+public interface Chromosome<T, G> {
 
-public interface Chromosome<C extends Chromosome<C, G>, G> {
-
+	/**
+	 * Returns the genome of this chromosome. The genome is the physical object
+	 * that this chromosome represents.
+	 * 
+	 * @return
+	 */
+	public T getGenome();
+	
 	/**
 	 * Crosses over this chromosome with the specified mate using the specified
 	 * crossover rate. Crossover should be non-destructive; therefore, this
@@ -12,7 +19,7 @@ public interface Chromosome<C extends Chromosome<C, G>, G> {
 	 * @param rate
 	 * @return
 	 */
-	public C crossover(C mate, double rate);
+	public Chromosome<T, G> crossover(Chromosome<T, G> mate, double rate);
 	
 	/**
 	 * Mutates this chromosome with the specified rate. Mutation is destructive;
@@ -21,6 +28,6 @@ public interface Chromosome<C extends Chromosome<C, G>, G> {
 	 * @param config
 	 * @param rate
 	 */
-	public void mutate(Configuration<C, G> config, double rate);
+	public void mutate(Configuration<T, G> config, double rate);
 
 }

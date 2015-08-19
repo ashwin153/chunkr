@@ -6,11 +6,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Population<C extends Chromosome<C, G>, G> {
+public class Population<T, G> {
 
 	private List<BigDecimal> _fitnesses;
-	private Configuration<C, G> _config;
-	private List<C> _chromosomes;
+	private Configuration<T, G> _config;
+	private List<Chromosome<T, G>> _chromosomes;
 	private Selector _selector;
 	
 	/**
@@ -22,15 +22,15 @@ public class Population<C extends Chromosome<C, G>, G> {
 	 * @param config configuration
 	 * @param selector type of selection mechanism
 	 */
-	public Population(int size, Configuration<C, G> config, Selector selector) {
+	public Population(int size, Configuration<T, G> config, Selector selector) {
 		_config = config;
 		_selector = selector;
 		
-		_chromosomes = new ArrayList<C>();
+		_chromosomes = new ArrayList<Chromosome<T, G>>();
 		_fitnesses = new ArrayList<BigDecimal>();
 		
 		for(int i = 0; i < size; i++) {
-			C chromosome = _config.getRandomChromosome();
+			Chromosome<T, G> chromosome = _config.getRandomChromosome();
 			_chromosomes.add(chromosome);
 			_fitnesses.add(_config.getFitness(chromosome));
 		}
@@ -45,13 +45,13 @@ public class Population<C extends Chromosome<C, G>, G> {
 	 * @param config configuration
 	 * @param selector type of selection mechanism
 	 */
-	public Population(List<C> chromosomes, Configuration<C, G> config, Selector selector) {
+	public Population(List<Chromosome<T, G>> chromosomes, Configuration<T, G> config, Selector selector) {
 		_chromosomes = chromosomes;
 		_config = config;
 		_selector = selector;
 		
 		_fitnesses = new ArrayList<BigDecimal>();
-		for(C chromosome : _chromosomes)
+		for(Chromosome<T, G> chromosome : _chromosomes)
 			_fitnesses.add(_config.getFitness(chromosome));
 	}
 	
@@ -62,7 +62,7 @@ public class Population<C extends Chromosome<C, G>, G> {
 	 * @param size
 	 * @return
 	 */
-	public List<C> getBestChromosomes(int size) {
+	public List<Chromosome<T, G>> getBestChromosomes(int size) {
 		// Sort the permutation matrix; this allows us to find the best
 		// chromosomes without altering the one-to-one correspondence it has
 		// with the fitnesses array.
@@ -77,9 +77,9 @@ public class Population<C extends Chromosome<C, G>, G> {
 			}
 		});
 		
-		List<C> best = new ArrayList<C>();
+		List<Chromosome<T, G>> best = new ArrayList<Chromosome<T, G>>();
 		for(int i = 0; i < size && i < _chromosomes.size(); i++)
-			best.add(_chromosomes.get(i));
+			best.add(_chromosomes.get(perm.get(i)));
 		return best;
 	}
 	
@@ -94,20 +94,20 @@ public class Population<C extends Chromosome<C, G>, G> {
 	 * @param mutationRate
 	 * @return
 	 */
-	public Population<C, G> evolve(double elitismRate, double crossoverRate, double mutationRate) {
-		List<C> next = new ArrayList<C>(_chromosomes.size());
+	public Population<T, G> evolve(double elitismRate, double crossoverRate, double mutationRate) {
+		List<Chromosome<T, G>> next = new ArrayList<>(_chromosomes.size());
 		next.addAll(getBestChromosomes((int) (_chromosomes.size() * elitismRate)));
 		
 		while(next.size() < _chromosomes.size()) {
-			C parent1 = _chromosomes.get(_selector.select(_fitnesses));
-			C parent2 = _chromosomes.get(_selector.select(_fitnesses));
+			Chromosome<T, G> parent1 = _chromosomes.get(_selector.select(_fitnesses));
+			Chromosome<T, G> parent2 = _chromosomes.get(_selector.select(_fitnesses));
 			
-			C child = parent1.crossover(parent2, crossoverRate);
+			Chromosome<T, G> child = parent1.crossover(parent2, crossoverRate);
 			child.mutate(_config, mutationRate);
 			next.add(child);
 		}
 		
-		return new Population<C, G>(next, _config, _selector);
+		return new Population<T, G>(next, _config, _selector);
 	}
 	
 }

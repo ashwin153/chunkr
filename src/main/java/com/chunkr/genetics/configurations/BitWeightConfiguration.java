@@ -1,16 +1,19 @@
 package com.chunkr.genetics.configurations;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.chunkr.compress.Chunker;
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
+import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Configuration;
 import com.chunkr.genetics.chromosomes.DoubleChromosome;
 
-public class BitWeightConfiguration implements Configuration<DoubleChromosome, Double> {
+public class BitWeightConfiguration implements Configuration<List<Double>, Double> {
 	
 	private int _chunkSize;
 	private int[] _inputs;
@@ -23,9 +26,9 @@ public class BitWeightConfiguration implements Configuration<DoubleChromosome, D
 	}
 
 	@Override
-	public BigDecimal getFitness(DoubleChromosome chromosome) {
+	public BigDecimal getFitness(Chromosome<List<Double>, Double> chromosome) {
 		Chunker standard = new StandardChunker(8);
-		Chunker modified = new ModifiedChunker(chromosome);
+		Chunker modified = new ModifiedChunker(chromosome.getGenome());
 		boolean[] bits = modified.unchunk(_chunks);
 		int[] outputs  = standard.chunk(bits);
 		
@@ -36,7 +39,10 @@ public class BitWeightConfiguration implements Configuration<DoubleChromosome, D
 			fitness = fitness.add(BigDecimal.valueOf(diff));
 		}
 		
-		return BigDecimal.ONE.divide(fitness.add(BigDecimal.ONE));
+		// Population maximizes fitness; to prevent divide by zero errors we add
+		// one to all denominators and invert the fraction.
+		return BigDecimal.ONE.divide(fitness.add(BigDecimal.ONE),
+				new MathContext(25, RoundingMode.HALF_UP));
 	}
 
 	@Override

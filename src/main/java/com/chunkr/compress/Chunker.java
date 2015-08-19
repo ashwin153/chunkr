@@ -55,7 +55,7 @@ public abstract class Chunker {
 		boolean[] unchunk = new boolean[getChunkSize()];
 		String binary = StringUtils.leftPad(Integer.toBinaryString(value), getChunkSize(), '0');
 		
-		for(int i = 0; i < binary.length(); i++)
+		for(int i = 0; i < binary.length() && i < unchunk.length; i++)
 			unchunk[i] = (binary.charAt(i) == '1') ? true : false;
 		
 		return unchunk;
