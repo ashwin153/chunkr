@@ -13,7 +13,7 @@ import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Configuration;
 import com.chunkr.genetics.chromosomes.DoubleChromosome;
 
-public class BitWeightConfiguration implements Configuration<List<Double>, Double> {
+public class BitWeightConfiguration extends Configuration<List<Double>, Double> {
 	
 	private int _chunkSize;
 	private int[] _inputs;

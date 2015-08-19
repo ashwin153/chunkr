@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Population<T, G> {
 
@@ -12,29 +16,6 @@ public class Population<T, G> {
 	private Configuration<T, G> _config;
 	private List<Chromosome<T, G>> _chromosomes;
 	private Selector _selector;
-	
-	/**
-	 * Constructs a new, randomized population of the specified size that is
-	 * parameterized by the specified configuration and utilizes the specified
-	 * selector to choose chromosomes during evolution.
-	 * 
-	 * @param size population size
-	 * @param config configuration
-	 * @param selector type of selection mechanism
-	 */
-	public Population(int size, Configuration<T, G> config, Selector selector) {
-		_config = config;
-		_selector = selector;
-		
-		_chromosomes = new ArrayList<Chromosome<T, G>>();
-		_fitnesses = new ArrayList<BigDecimal>();
-		
-		for(int i = 0; i < size; i++) {
-			Chromosome<T, G> chromosome = _config.getRandomChromosome();
-			_chromosomes.add(chromosome);
-			_fitnesses.add(_config.getFitness(chromosome));
-		}
-	}
 	
 	/**
 	 * Constructs a new population from an existing list of chromosomes. This
@@ -50,9 +31,30 @@ public class Population<T, G> {
 		_config = config;
 		_selector = selector;
 		
-		_fitnesses = new ArrayList<BigDecimal>();
-		for(Chromosome<T, G> chromosome : _chromosomes)
-			_fitnesses.add(_config.getFitness(chromosome));
+		try {
+			// Create parallelized tasks for evaluating the fitness of chromosomes
+			List<Callable<BigDecimal>> tasks = new ArrayList<Callable<BigDecimal>>();
+			for(final Chromosome<T, G> chromosome : _chromosomes)
+				tasks.add(new Callable<BigDecimal>() {
+					@Override
+					public BigDecimal call() throws Exception {
+						return _config.getFitness(chromosome);
+					}
+				});
+			
+			// Evaluate the fitness of all chromosomes and retrieve the results
+			ExecutorService executor = Executors.newCachedThreadPool();
+			_fitnesses = new ArrayList<BigDecimal>();
+			for(Future<BigDecimal> fitness : executor.invokeAll(tasks))
+				_fitnesses.add(fitness.get());
+			executor.shutdownNow();
+		} catch(Exception e) {
+			// If there is a problem parallelizing the algorithm, then fall back
+			// on the slow way of calculating fitness.
+			_fitnesses = new ArrayList<BigDecimal>();
+			for(Chromosome<T, G> chromosome : _chromosomes)
+				_fitnesses.add(_config.getFitness(chromosome));
+		}
 	}
 	
 	/**

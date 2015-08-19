@@ -1,8 +1,17 @@
 package com.chunkr.genetics;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-public interface Configuration<T, G> {
+public abstract class Configuration<T, G> {
+	
+	public Population<T, G> getRandomPopulation(int size, Selector selector) {
+		List<Chromosome<T, G>> chromosomes = new ArrayList<Chromosome<T, G>>();
+		for(int i = 0; i < size; i++)
+			chromosomes.add(getRandomChromosome());
+		return new Population<T, G>(chromosomes, this, selector);
+	}
 
 	/**
 	 * Returns a reference to a callable object that in turn returns the fitness
@@ -10,14 +19,14 @@ public interface Configuration<T, G> {
 	 * 
 	 * @return
 	 */
-	public BigDecimal getFitness(Chromosome<T, G> chromosome);
+	abstract public BigDecimal getFitness(Chromosome<T, G> chromosome);
 
 	/**
 	 * Returns a randomly selected gene.
 	 * 
 	 * @return
 	 */
-	public G getRandomGene();
+	abstract public G getRandomGene();
 	
 	/**
 	 * Returns a randomly selected gene that uses the specified gene as a
@@ -27,12 +36,12 @@ public interface Configuration<T, G> {
 	 * @param context
 	 * @return
 	 */
-	public G getRandomGene(G context);
+	abstract public G getRandomGene(G context);
 	
 	/**
 	 * Returns a randomly selected chromosome.
 	 * @return
 	 */
-	public Chromosome<T, G> getRandomChromosome();
+	abstract public Chromosome<T, G> getRandomChromosome();
 	
 }

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Population;
-import com.chunkr.genetics.selectors.RouletteWheelSelector;
+import com.chunkr.genetics.selectors.TournamentSelector;
 
 public class BitWeightConfigurationTest {
 
@@ -54,7 +54,7 @@ public class BitWeightConfigurationTest {
 		}
 		
 		BitWeightConfiguration config = new BitWeightConfiguration(6, input, chunks);
-		Population<List<Double>, Double> population = new Population<>(1000, config, new RouletteWheelSelector());
+		Population<List<Double>, Double> population = config.getRandomPopulation(1000, new TournamentSelector(5));
 
 		for(int i = 0; i < 100; i++)
 			population = population.evolve(0.02, 0.80, 0.10);
