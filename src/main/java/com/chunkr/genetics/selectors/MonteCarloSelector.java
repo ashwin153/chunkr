@@ -2,7 +2,6 @@ package com.chunkr.genetics.selectors;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.concurrent.Future;
 
 import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Selector;
@@ -18,11 +17,8 @@ import com.chunkr.genetics.Selector;
 public class MonteCarloSelector implements Selector {
 
 	@Override
-	public <C extends Chromosome<C, G>, G> C select(
-			List<C> chromosomes, List<Future<BigDecimal>> fitnesses) {
-		
-		int rand = (int) (Math.random() * chromosomes.size());
-		return chromosomes.get(rand);
+	public int select(List<BigDecimal> fitnesses) {
+		return (int) (Math.random() * fitnesses.size());
 	}
 
 }

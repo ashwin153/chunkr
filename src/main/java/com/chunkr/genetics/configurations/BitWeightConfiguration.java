@@ -1,7 +1,6 @@
 package com.chunkr.genetics.configurations;
 
 import java.math.BigDecimal;
-import java.util.concurrent.Callable;
 
 import com.chunkr.genetics.Configuration;
 import com.chunkr.genetics.chromosomes.DoubleChromosome;
@@ -13,7 +12,7 @@ public class BitWeightConfiguration implements Configuration<DoubleChromosome, D
 	}
 
 	@Override
-	public Callable<BigDecimal> getFitness(DoubleChromosome chromosome) {
+	public BigDecimal getFitness(DoubleChromosome chromosome) {
 		// TODO Auto-generated method stub
 		return null;
 	}

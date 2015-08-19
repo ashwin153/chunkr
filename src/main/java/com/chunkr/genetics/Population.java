@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class Population<C extends Chromosome<C, G>, G> {
 
-	private List<Future<BigDecimal>> _fitnesses;
+	private List<BigDecimal> _fitnesses;
 	private Configuration<C, G> _config;
 	private List<C> _chromosomes;
 	private Selector _selector;
@@ -29,17 +26,14 @@ public class Population<C extends Chromosome<C, G>, G> {
 		_config = config;
 		_selector = selector;
 		
-		ExecutorService service = Executors.newCachedThreadPool();
 		_chromosomes = new ArrayList<C>();
-		_fitnesses = new ArrayList<Future<BigDecimal>>();
+		_fitnesses = new ArrayList<BigDecimal>();
 		
 		for(int i = 0; i < size; i++) {
 			C chromosome = _config.getRandomChromosome();
 			_chromosomes.add(chromosome);
-			_fitnesses.add(service.submit(_config.getFitness(chromosome)));
+			_fitnesses.add(_config.getFitness(chromosome));
 		}
-		
-		service.shutdown();
 	}
 	
 	/**
@@ -56,13 +50,9 @@ public class Population<C extends Chromosome<C, G>, G> {
 		_config = config;
 		_selector = selector;
 		
-		ExecutorService service = Executors.newCachedThreadPool();
-		_fitnesses = new ArrayList<Future<BigDecimal>>();
-		
+		_fitnesses = new ArrayList<BigDecimal>();
 		for(C chromosome : _chromosomes)
-			_fitnesses.add(service.submit(_config.getFitness(chromosome)));
-		
-		service.shutdown();
+			_fitnesses.add(_config.getFitness(chromosome));
 	}
 	
 	/**
@@ -83,16 +73,7 @@ public class Population<C extends Chromosome<C, G>, G> {
 		Collections.sort(perm, new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
-				try {
-					BigDecimal f1 = _fitnesses.get(o1).get();
-					BigDecimal f2 = _fitnesses.get(o2).get();
-					return f1.compareTo(f2);
-				} catch(Exception e) {
-					// If we cannot determine the fitness, then we cannot evolve
-					// this population; Simply through a RuntimeException and
-					// end execution.
-					throw new RuntimeException(e);
-				}
+				return _fitnesses.get(o1).compareTo(_fitnesses.get(o2));
 			}
 		});
 		
@@ -118,8 +99,8 @@ public class Population<C extends Chromosome<C, G>, G> {
 		next.addAll(getBestChromosomes((int) (_chromosomes.size() * elitismRate)));
 		
 		while(next.size() < _chromosomes.size()) {
-			C parent1 = _selector.select(_chromosomes, _fitnesses);
-			C parent2 = _selector.select(_chromosomes, _fitnesses);
+			C parent1 = _chromosomes.get(_selector.select(_fitnesses));
+			C parent2 = _chromosomes.get(_selector.select(_fitnesses));
 			
 			C child = parent1.crossover(parent2, crossoverRate);
 			child.mutate(_config, mutationRate);

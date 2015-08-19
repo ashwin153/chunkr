@@ -1,7 +1,6 @@
 package com.chunkr.genetics;
 
 import java.math.BigDecimal;
-import java.util.concurrent.Callable;
 
 public interface Configuration<C extends Chromosome<C, G>, G> {
 
@@ -11,7 +10,7 @@ public interface Configuration<C extends Chromosome<C, G>, G> {
 	 * 
 	 * @return
 	 */
-	public Callable<BigDecimal> getFitness(C chromosome);
+	public BigDecimal getFitness(C chromosome);
 
 	/**
 	 * Returns a randomly selected gene.
