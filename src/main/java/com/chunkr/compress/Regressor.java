@@ -1,5 +1,7 @@
 package com.chunkr.compress;
 
+import com.chunkr.expressions.Expression;
+
 
 /**
  * Regressors are responsible for fitting a smooth curve (Expression) to a set

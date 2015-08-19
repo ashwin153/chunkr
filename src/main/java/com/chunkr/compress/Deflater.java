@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
+import com.chunkr.expressions.Expression;
 
 public class Deflater implements Runnable {
 

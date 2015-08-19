@@ -7,14 +7,14 @@ import java.util.List;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
 import org.apache.commons.math3.fitting.WeightedObservedPoint;
 
-import com.chunkr.compress.Expression;
 import com.chunkr.compress.Regressor;
-import com.chunkr.compress.expressions.Operation;
-import com.chunkr.compress.expressions.operations.binary.Add;
-import com.chunkr.compress.expressions.operations.binary.Mul;
-import com.chunkr.compress.expressions.operations.nullary.Constant;
-import com.chunkr.compress.expressions.operations.nullary.Variable;
-import com.chunkr.compress.expressions.operations.unary.Pow;
+import com.chunkr.expressions.Expression;
+import com.chunkr.expressions.Operation;
+import com.chunkr.expressions.operations.binary.Add;
+import com.chunkr.expressions.operations.binary.Mul;
+import com.chunkr.expressions.operations.nullary.Constant;
+import com.chunkr.expressions.operations.nullary.Variable;
+import com.chunkr.expressions.operations.unary.Pow;
 
 public class LeastSquaresRegressor implements Regressor {
 	

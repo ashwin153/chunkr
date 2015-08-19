@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.chunkr.compress.Expression;
+import com.chunkr.expressions.Expression;
 
 public class LeastSquaresRegressorTest {
 

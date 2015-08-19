@@ -1,5 +1,7 @@
 package com.chunkr.compress;
 
+import com.chunkr.expressions.Expression;
+
 
 
 /**

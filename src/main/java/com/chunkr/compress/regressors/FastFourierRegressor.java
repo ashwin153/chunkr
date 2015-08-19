@@ -1,7 +1,7 @@
 package com.chunkr.compress.regressors;
 
-import com.chunkr.compress.Expression;
 import com.chunkr.compress.Regressor;
+import com.chunkr.expressions.Expression;
 
 public class FastFourierRegressor implements Regressor {
 
