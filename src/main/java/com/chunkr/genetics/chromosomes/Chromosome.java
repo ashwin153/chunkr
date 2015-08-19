@@ -1,4 +1,6 @@
-package com.chunkr.genetics;
+package com.chunkr.genetics.chromosomes;
+
+import com.chunkr.genetics.configurations.Configuration;
 
 public interface Chromosome<C extends Chromosome<C, G>, G> {
 

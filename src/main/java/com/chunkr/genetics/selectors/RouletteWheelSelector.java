@@ -3,8 +3,6 @@ package com.chunkr.genetics.selectors;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.chunkr.genetics.Selector;
-
 public class RouletteWheelSelector implements Selector {
 
 	@Override
@@ -17,7 +15,7 @@ public class RouletteWheelSelector implements Selector {
 		// Fitness proportionate selection
 		BigDecimal rand = sum.multiply(BigDecimal.valueOf(Math.random()));
 		int index = 0;
-		while(rand.compareTo(BigDecimal.ZERO) > 0 && index <= fitnesses.size()) {
+		while(rand.compareTo(BigDecimal.ZERO) > 0 && index < fitnesses.size()) {
 			rand = rand.subtract(fitnesses.get(index));
 			index++;
 		}

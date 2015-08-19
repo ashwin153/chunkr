@@ -2,7 +2,6 @@ package com.chunkr.genetics.configurations;
 
 import java.math.BigDecimal;
 
-import com.chunkr.genetics.Configuration;
 import com.chunkr.genetics.chromosomes.DoubleChromosome;
 
 public class BitWeightConfiguration implements Configuration<DoubleChromosome, Double> {
