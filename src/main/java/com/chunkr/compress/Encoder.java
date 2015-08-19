@@ -9,6 +9,8 @@ import java.util.zip.InflaterInputStream;
 
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
+import com.chunkr.compress.chunkers.ModifiedChunker;
+import com.chunkr.compress.chunkers.StandardChunker;
 import com.chunkr.compress.expressions.Expression;
 import com.chunkr.compress.expressions.operations.binary.Add;
 import com.chunkr.compress.expressions.operations.binary.Mul;
@@ -68,6 +70,9 @@ public class Encoder {
 		serializer.getField("_operations").setClass(ArrayList.class, list);
 		_kryo.register(Expression.class, serializer, 11);
 		_kryo.register(Archive.class, 12);
+		_kryo.register(ModifiedChunker.class, 13);
+		_kryo.register(StandardChunker.class, 14);
+		_kryo.register(double[].class, 15);
 
 		// Because expression do not have a no-arg constructor, we have to use
 		// the StdInstantiatorStrategy which creates an object instance without

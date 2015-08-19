@@ -18,7 +18,7 @@ public class ModifiedChunker extends Chunker {
 		
 		_weights = new double[chunkSize];
 		for(int i = 0; i < _weights.length; i++)
-			_weights[i] = 1.0 / (i + 0.95);
+			_weights[i] = 1.0 / (i + 1.50);
 	}
 	
 	public ModifiedChunker(double[] weights) {

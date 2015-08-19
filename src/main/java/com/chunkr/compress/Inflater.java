@@ -4,10 +4,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
 import com.chunkr.compress.chunkers.Chunker;
+import com.chunkr.compress.chunkers.StandardChunker;
 import com.chunkr.compress.expressions.Expression;
 
 public class Inflater implements Runnable {
@@ -39,17 +41,23 @@ public class Inflater implements Runnable {
 				chunks[i] = round.intValue();
 			}
 			
+			System.out.println(Arrays.toString(chunks));
 			// Step 3: Decode and covert the binary versions of the chunks into bytes
-			Chunker chunker = archive.getChunker();
-			boolean[] unchunks = chunker.unchunk(chunks);
+			Chunker standard = new StandardChunker(8);
+			Chunker modified = archive.getChunker();
 			
-			byte[] bytes = new byte[unchunks.length / 8];
-			for(int i = 0; i < bytes.length; i++)
-				for(int j = 0; j < 8; j++)
-					if(unchunks[i * 8 + j])
-						bytes[i] |= (128 >> j);
+			boolean[] unchunks = modified.unchunk(chunks);
+			int[] data = standard.chunk(unchunks);
 			
-			_output.write(bytes);
+			for(int i = 0; i < data.length; i++)
+				_output.write(data[i]);
+
+//			byte[] bytes = new byte[unchunks.length / 8];
+//			for(int i = 0; i < bytes.length; i++)
+//				for(int j = 0; j < 8; j++)
+//					if(unchunks[i * 8 + j])
+//						bytes[i] |= (128 >> j);
+			
 			LOGGER.info("Successfully wrote inflated bits to output stream");
 		} catch(Exception e) {
 			// Catch any exceptions and print a detailed error message + stack trace
