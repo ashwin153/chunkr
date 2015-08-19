@@ -9,8 +9,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.chunkr.compress.chunkers.Chunker;
-import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.regressors.LeastSquaresRegressor;
 import com.chunkr.compress.regressors.Regressor;
 

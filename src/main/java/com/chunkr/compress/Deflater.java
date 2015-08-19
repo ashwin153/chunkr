@@ -2,9 +2,7 @@ package com.chunkr.compress;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
 
 import com.chunkr.compress.chunkers.Chunker;
