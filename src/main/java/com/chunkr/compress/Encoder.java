@@ -11,7 +11,6 @@ import org.objenesis.strategy.StdInstantiatorStrategy;
 
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
-import com.chunkr.compress.expressions.Expression;
 import com.chunkr.compress.expressions.operations.binary.Add;
 import com.chunkr.compress.expressions.operations.binary.Mul;
 import com.chunkr.compress.expressions.operations.nullary.Constant;

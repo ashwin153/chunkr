@@ -1,9 +1,10 @@
-package com.chunkr.compress.expressions;
+package com.chunkr.compress;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Stack;
 
+import com.chunkr.compress.expressions.Operation;
 import com.chunkr.compress.expressions.operations.nullary.Variable;
 
 /**

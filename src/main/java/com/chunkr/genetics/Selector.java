@@ -1,4 +1,4 @@
-package com.chunkr.genetics.selectors;
+package com.chunkr.genetics;
 
 import java.math.BigDecimal;
 import java.util.List;

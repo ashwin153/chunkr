@@ -3,6 +3,8 @@ package com.chunkr.genetics.selectors;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.chunkr.genetics.Selector;
+
 public class RouletteWheelSelector implements Selector {
 
 	@Override

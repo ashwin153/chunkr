@@ -5,11 +5,8 @@ import java.io.OutputStream;
 
 import org.apache.log4j.Logger;
 
-import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
-import com.chunkr.compress.expressions.Expression;
-import com.chunkr.compress.regressors.Regressor;
 
 public class Deflater implements Runnable {
 
@@ -21,7 +18,7 @@ public class Deflater implements Runnable {
 	private OutputStream _output;
 	private int _chunkSize;
 	
-	public Deflater(InputStream input, OutputStream output, int chunkSize, Regressor regressor, Encoder encoder) {
+	public Deflater(int chunkSize, InputStream input, OutputStream output, Regressor regressor, Encoder encoder) {
 		_input = input;
 		_output = output;
 		_chunkSize = chunkSize;
@@ -43,13 +40,11 @@ public class Deflater implements Runnable {
 			boolean[] bits = standard.unchunk(data);
 			int[] chunks = modified.chunk(bits);
 
-			// Step 2: Regress the chunked values into an expression
+			// Step 2: Regress into expression and create archive
 			Expression expression = _regressor.fit(chunks);
-
-			// Step 3: Create an archive out of the compressed expression
 			Archive archive = new Archive(modified, expression, chunks.length);
 	
-			// Step 4: Encode the archive into the specified output stream
+			// Step 3: Encode the archive into the specified output stream
 			_encoder.write(archive, _output);	
 			LOGGER.info("Successfully wrote deflated bits to output stream");
 		} catch(Exception e) {

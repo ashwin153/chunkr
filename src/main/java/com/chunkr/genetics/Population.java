@@ -6,10 +6,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.chunkr.genetics.chromosomes.Chromosome;
-import com.chunkr.genetics.configurations.Configuration;
-import com.chunkr.genetics.selectors.Selector;
-
 public class Population<C extends Chromosome<C, G>, G> {
 
 	private List<BigDecimal> _fitnesses;
@@ -77,7 +73,7 @@ public class Population<C extends Chromosome<C, G>, G> {
 		Collections.sort(perm, new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
-				return _fitnesses.get(o1).compareTo(_fitnesses.get(o2));
+				return - _fitnesses.get(o1).compareTo(_fitnesses.get(o2));
 			}
 		});
 		

@@ -2,6 +2,8 @@ package com.chunkr.compress.chunkers;
 
 import java.util.Arrays;
 
+import com.chunkr.compress.Chunker;
+
 public class StandardChunker extends Chunker {
 
 	public StandardChunker(int chunkSize) {

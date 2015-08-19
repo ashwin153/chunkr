@@ -1,10 +1,14 @@
 package com.chunkr.compress.chunkers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import com.chunkr.compress.Chunker;
 
 public class ModifiedChunker extends Chunker {
 	
-	private double[] _weights;
+	private List<Double> _weights;
 	
 	/**
 	 * Constructs a new ModifiedChunker using the default bit weightings. By
@@ -16,13 +20,13 @@ public class ModifiedChunker extends Chunker {
 	public ModifiedChunker(int chunkSize) {
 		super(chunkSize);
 		
-		_weights = new double[chunkSize];
-		for(int i = 0; i < _weights.length; i++)
-			_weights[i] = 1.0 / (i + 1.50);
+		_weights = new ArrayList<Double>(chunkSize);
+		for(int i = 0; i < chunkSize; i++)
+			_weights.add(1.0 / (i + 1.50));
 	}
 	
-	public ModifiedChunker(double[] weights) {
-		super(weights.length);
+	public ModifiedChunker(List<Double> weights) {
+		super(weights.size());
 		_weights = weights;
 	}
 	
@@ -60,8 +64,8 @@ public class ModifiedChunker extends Chunker {
 					&& index < getChunkSize(); chunk--, index++) {
 				
 				if(unchunks[chunk][index])
-					ones += _weights[index];
-				total += _weights[index];
+					ones += _weights.get(index);
+				total += _weights.get(index);
 			}
 			
 			// If more than half the chunks have a '1', then set the value of

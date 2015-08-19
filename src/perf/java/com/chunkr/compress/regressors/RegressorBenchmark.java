@@ -1,8 +1,8 @@
 package com.chunkr.compress.regressors;
 
+import com.chunkr.compress.Regressor;
 import com.chunkr.compress.regressors.FastFourierRegressor;
 import com.chunkr.compress.regressors.GeneticRegressor;
-import com.chunkr.compress.regressors.Regressor;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.caliper.api.VmOptions;

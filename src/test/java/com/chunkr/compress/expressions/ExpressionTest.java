@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import com.chunkr.compress.Expression;
 import com.chunkr.compress.expressions.operations.nullary.Variable;
 
 import edu.umd.cs.mtc.MultithreadedTestCase;

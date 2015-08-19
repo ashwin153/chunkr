@@ -7,7 +7,8 @@ import java.util.List;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
 import org.apache.commons.math3.fitting.WeightedObservedPoint;
 
-import com.chunkr.compress.expressions.Expression;
+import com.chunkr.compress.Expression;
+import com.chunkr.compress.Regressor;
 import com.chunkr.compress.expressions.Operation;
 import com.chunkr.compress.expressions.operations.binary.Add;
 import com.chunkr.compress.expressions.operations.binary.Mul;

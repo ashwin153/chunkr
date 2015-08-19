@@ -1,8 +1,6 @@
-package com.chunkr.genetics.configurations;
+package com.chunkr.genetics;
 
 import java.math.BigDecimal;
-
-import com.chunkr.genetics.chromosomes.Chromosome;
 
 public interface Configuration<C extends Chromosome<C, G>, G> {
 
