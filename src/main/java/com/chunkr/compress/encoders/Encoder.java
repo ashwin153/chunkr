@@ -1,5 +1,6 @@
 package com.chunkr.compress.encoders;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -13,7 +14,7 @@ public interface Encoder {
 	 * @param stream
 	 * @return
 	 */
-	public Archive read(InputStream stream);
+	public Archive read(InputStream stream) throws IOException ;
 	
 	/**
 	 * Writes an archive to an output stream.
@@ -21,6 +22,6 @@ public interface Encoder {
 	 * @param archive
 	 * @param stream
 	 */
-	public void write(Archive archive, OutputStream stream);
+	public void write(Archive archive, OutputStream stream) throws IOException;
 	
 }

@@ -31,7 +31,7 @@ public class LeastSquaresRegressor implements Regressor {
 		double[] coeffs = PolynomialCurveFitter.create(_degree).fit(points);
 		
 		// Translate the coefficients into an evaluable expression
-		Variable x = new Variable("x");
+		Variable x = new Variable('x');
 		List<Operation> operations = new ArrayList<Operation>();
 		
 		operations.add(0, new Constant(coeffs[0]));

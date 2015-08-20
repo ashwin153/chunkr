@@ -15,7 +15,7 @@ public abstract class ChunkerTest {
 	@Test
 	public void testUnchunk() {
 		Chunker chunker = mock(Chunker.class, CALLS_REAL_METHODS);
-		when(chunker.getChunkSize()).thenReturn(4);
+		when(chunker.getChunkSize()).thenReturn((byte) 4);
 		
 		boolean[] unchunks = new boolean[] { true, false, true, false };
 		int chunk = 10;

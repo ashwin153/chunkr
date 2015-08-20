@@ -2,10 +2,12 @@ package com.chunkr.compress;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
 import com.chunkr.compress.chunkers.Chunker;
+import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
 import com.chunkr.compress.encoders.Encoder;
 import com.chunkr.compress.evaluators.Evaluator;
@@ -38,8 +40,8 @@ public class Inflater implements Runnable {
 			// Convert the chunks to bits using modified chunking, then covert
 			// them into bytes (as ints) using standard chunking. Then write
 			// these bytes to the specified output stream.
-			Chunker standard = new StandardChunker(8);
-			Chunker modified = archive.getChunker();
+			Chunker standard = new StandardChunker((byte) 8);
+			Chunker modified = new ModifiedChunker(archive.getWeights());
 			boolean[] unchunks = modified.unchunk(chunks);
 			int[] data = standard.chunk(unchunks);
 			
@@ -51,6 +53,7 @@ public class Inflater implements Runnable {
 			// Catch any exceptions and print a detailed error message + stack trace
 			LOGGER.error("Unable to inflate input data");
 			LOGGER.debug(e);
+			LOGGER.debug(Arrays.toString(e.getStackTrace()));
 		}
 	}
 	

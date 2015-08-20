@@ -18,6 +18,10 @@ public class Pow extends UnaryOperation {
 		_pow = pow;
 	}
 	
+	public int getPower() {
+		return _pow;
+	}
+	
 	@Override
 	public BigDecimal eval(BigDecimal... operands) {
 		return operands[0].pow(_pow, CONTEXT);

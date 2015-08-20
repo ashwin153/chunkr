@@ -10,8 +10,8 @@ public class ConstantTest {
 	
 	@Test
 	public void testEval() {
-		assertEquals(BigDecimal.valueOf(-1.0), new Constant(BigDecimal.valueOf(-1.0)).eval());
-		assertEquals(BigDecimal.valueOf(+1.0), new Constant(BigDecimal.valueOf(+1.0)).eval());
+		assertEquals(BigDecimal.valueOf(-1.0), new Constant(-1.0).eval());
+		assertEquals(BigDecimal.valueOf(+1.0), new Constant(+1.0).eval());
 	}
 	
 }

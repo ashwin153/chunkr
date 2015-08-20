@@ -48,7 +48,7 @@ public class EvaluatorBenchmark {
 	public void setUp() throws Exception {
 		_evaluator = _method.getEvaluator();
 		
-		Variable x = new Variable("x");
+		Variable x = new Variable('x');
 		_expression = new Expression(x, Arrays.asList((Operation) x));
 	}
 	

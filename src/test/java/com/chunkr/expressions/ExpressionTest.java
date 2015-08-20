@@ -35,7 +35,7 @@ public class ExpressionTest {
 		
 		@Override
 		public void initialize() {
-			Variable x = new Variable("x");
+			Variable x = new Variable('x');
 			_e1 = new Expression(x, Arrays.asList((Operation) x));
 			_e2 = new Expression(x, Arrays.asList((Operation) x));
 		}

@@ -11,7 +11,7 @@ public class StandardChunkerTest {
 		boolean[] unchunks = new boolean[] { true, false, true, true, false, true };
 		int[] chunks = new int[] { 5, 5 };
 		
-		Chunker chunker = new StandardChunker(3);
+		Chunker chunker = new StandardChunker((byte) 3);
 		assertArrayEquals(chunks, chunker.chunk(unchunks));
 	}
 	
@@ -20,7 +20,7 @@ public class StandardChunkerTest {
 		boolean[] unchunks = new boolean[] { true, false, true, true, false, true };
 		int[] chunks = new int[] { 5, 5 };
 		
-		Chunker chunker = new StandardChunker(3);
+		Chunker chunker = new StandardChunker((byte) 3);
 		assertArrayEquals(unchunks, chunker.unchunk(chunks));
 	}
 }

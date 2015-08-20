@@ -53,8 +53,8 @@ public class Deflater implements Runnable {
 			for(int i = 0; i < data.length; i++)
 				data[i] = _input.read();
 			
-			Chunker standard = new StandardChunker(8);
-			Chunker modified = new ModifiedChunker(_chunkSize);
+			Chunker standard = new StandardChunker((byte) 8);
+			Chunker modified = new ModifiedChunker((byte) _chunkSize);
 			boolean[] bits = standard.unchunk(data);
 			int[] chunks = modified.chunk(bits);
 
@@ -72,8 +72,7 @@ public class Deflater implements Runnable {
 				population = population.evolve(0.02, 0.85, 0.10);
 			
 			Chromosome<List<Double>, Double> best = population.getBestChromosomes(1).get(0);
-			Chunker optimal = new ModifiedChunker(best.getGenome());
-			Archive archive = new Archive(optimal, expression, chunks.length);
+			Archive archive = new Archive(_chunkSize, chunks.length, best.getGenome(), expression);
 			_encoder.write(archive, _output);	
 			
 			LOGGER.info("Successfully wrote deflated bits to output stream");

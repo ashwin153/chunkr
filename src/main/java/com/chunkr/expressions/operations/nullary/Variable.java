@@ -6,19 +6,23 @@ import com.chunkr.expressions.operations.NullaryOperation;
 
 public class Variable extends NullaryOperation {
 
-	private String _name;
+	private char _name;
 	private BigDecimal _value;
 	
-	public Variable(String name) {
+	public Variable(char name) {
 		this(name, BigDecimal.ZERO);
 	}
 	
-	public Variable(String name, BigDecimal value) {
+	public Variable(char name, BigDecimal value) {
 		_name = name;
 		_value = value;
 	}
 	
-	public void set(BigDecimal value) {
+	public char getName() {
+		return _name;
+	}
+	
+	public void setValue(BigDecimal value) {
 		_value = value;
 	}
 	
@@ -29,7 +33,7 @@ public class Variable extends NullaryOperation {
 	
 	@Override
 	public String toString() {
-		return _name;
+		return String.valueOf(_name);
 	}
 	
 }

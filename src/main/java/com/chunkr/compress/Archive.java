@@ -1,6 +1,7 @@
 package com.chunkr.compress;
 
-import com.chunkr.compress.chunkers.Chunker;
+import java.util.List;
+
 import com.chunkr.expressions.Expression;
 
 /**
@@ -12,26 +13,31 @@ import com.chunkr.expressions.Expression;
  */
 public class Archive {
 
-	private Chunker _chunker;
-	private int _length;
+	private List<Double> _weights;
+	private int _chunkSize, _length;
 	private Expression _expression;
 	
-	public Archive(Chunker chunker, Expression expression, int length) {
-		_chunker = chunker;
+	public Archive(int chunkSize, int length, List<Double> weights, Expression expression) {
+		_chunkSize = chunkSize;
 		_length = length;
 		_expression = expression;
+		_weights = weights;
 	}
 	
-	public Chunker getChunker() {
-		return _chunker;
-	}
-	
-	public Expression getExpression() {
-		return _expression;
+	public int getChunkSize() {
+		return _chunkSize;
 	}
 	
 	public int getLength() {
 		return _length;
+	}
+	
+	public List<Double> getWeights() {
+		return _weights;
+	}
+	
+	public Expression getExpression() {
+		return _expression;
 	}
 	
 }

@@ -45,7 +45,7 @@ public class Expression {
 		// make evaluations synchronized to ensure that evaluations are
 		// thread-safe.
 		synchronized(_variable) {
-			_variable.set(x);
+			_variable.setValue(x);
 			
 			Stack<BigDecimal> stack = new Stack<BigDecimal>();
 			for(int i = 0; i < _operations.size(); i++) {

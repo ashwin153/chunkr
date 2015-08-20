@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class StandardChunker extends Chunker {
 
-	public StandardChunker(int chunkSize) {
+	public StandardChunker(byte chunkSize) {
 		super(chunkSize);
 	}
 	
