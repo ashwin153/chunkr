@@ -15,6 +15,7 @@ public class ParallelEvaluator implements Evaluator {
 
 	@Override
 	public int[] eval(int length, final Expression expression) {
+		ExecutorService executor = Executors.newCachedThreadPool();
 		List<Callable<Integer>> tasks = new ArrayList<Callable<Integer>>();
 		for(int i = 0; i < length; i++) {
 			final BigDecimal x = BigDecimal.valueOf(i);
@@ -30,19 +31,18 @@ public class ParallelEvaluator implements Evaluator {
 		
 		try {
 			// Evaluate the fitness of all chromosomes and retrieve the results
-			ExecutorService executor = Executors.newCachedThreadPool();
 			List<Future<Integer>> results = executor.invokeAll(tasks);
 			int[] chunks = new int[length];
-			
 			for(int i = 0; i < chunks.length; i++)
 				chunks[i] = results.get(i).get();
-	
-			executor.shutdownNow();
 			return chunks;
 		} catch(Exception e) {
 			// If we are unable to parallelize the task, then fall back on
 			// serial evaluation; this prevents the evaluation from failing.
 			return new SerialEvaluator().eval(length, expression);
+		} finally {
+			// Ensure the executor is shutdown to force garbage collection
+			executor.shutdownNow();
 		}
 	}
 

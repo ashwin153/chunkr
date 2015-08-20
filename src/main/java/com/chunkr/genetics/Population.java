@@ -36,6 +36,7 @@ public class Population<T, G> {
 		_selector = selector;
 		
 		// Create parallelized tasks for evaluating the fitness of chromosomes
+		ExecutorService executor = Executors.newCachedThreadPool();
 		List<Callable<BigDecimal>> tasks = new ArrayList<Callable<BigDecimal>>();
 		for (final Chromosome<T, G> chromosome : _chromosomes)
 			tasks.add(new Callable<BigDecimal>() {
@@ -47,17 +48,18 @@ public class Population<T, G> {
 		
 		try {
 			// Evaluate the fitness of all chromosomes and retrieve the results
-			ExecutorService executor = Executors.newCachedThreadPool();
 			_fitnesses = new ArrayList<BigDecimal>();
 			for(Future<BigDecimal> fitness : executor.invokeAll(tasks))
 				_fitnesses.add(fitness.get());
-			executor.shutdownNow();
 		} catch(Exception e) {
 			// If there is a problem parallelizing the algorithm, then fall back
 			// on the slow way of calculating fitness.
 			_fitnesses = new ArrayList<BigDecimal>();
 			for(Chromosome<T, G> chromosome : _chromosomes)
 				_fitnesses.add(_config.getFitness(chromosome));
+		} finally {
+			// Ensure the executor is shutdown to force garbage collection
+			executor.shutdownNow();
 		}
 	}
 	
