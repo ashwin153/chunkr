@@ -1,11 +1,11 @@
-package com.chunkr.expressions.operations.nullary;
+package com.chunkr.expressions.operations;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.chunkr.expressions.operations.nullary.NullaryOperation;
+import com.chunkr.expressions.operations.NullaryOperation;
 
 public class NullaryOperationTest {
 

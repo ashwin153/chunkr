@@ -1,5 +1,7 @@
 package com.chunkr.expressions.operations;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 /**
  * Operations are the building blocks of mathematical expressions; operations
@@ -11,6 +13,8 @@ import java.math.BigDecimal;
  * 
  */
 public interface Operation {
+	
+	public static final MathContext CONTEXT = new MathContext(25, RoundingMode.HALF_UP);
 	
 	/**
 	 * Returns the "arity," or the number of operands that this operation takes.

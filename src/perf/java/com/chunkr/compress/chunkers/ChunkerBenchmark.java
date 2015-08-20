@@ -4,7 +4,6 @@ import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.caliper.api.VmOptions;
-import com.google.caliper.runner.CaliperMain;
 
 /**
  * This performance benchmarks tests the runtime performance and memory
@@ -16,10 +15,6 @@ import com.google.caliper.runner.CaliperMain;
  */
 @VmOptions("-server")
 public class ChunkerBenchmark {
-	
-	public static void main(String[] args) {
-		CaliperMain.main(ChunkerBenchmark.class, args);
-	}
 	
 	@Param({ "5", "6", "7" })
 	private int _chunkSize;

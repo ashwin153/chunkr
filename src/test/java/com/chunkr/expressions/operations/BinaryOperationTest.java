@@ -1,11 +1,11 @@
-package com.chunkr.expressions.operations.binary;
+package com.chunkr.expressions.operations;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.chunkr.expressions.operations.binary.BinaryOperation;
+import com.chunkr.expressions.operations.BinaryOperation;
 
 public class BinaryOperationTest {
 

@@ -2,6 +2,8 @@ package com.chunkr.expressions.operations.unary;
 
 import java.math.BigDecimal;
 
+import com.chunkr.expressions.operations.UnaryOperation;
+
 public class Pow extends UnaryOperation {
 	
 	private int _pow;
@@ -18,7 +20,7 @@ public class Pow extends UnaryOperation {
 	
 	@Override
 	public BigDecimal eval(BigDecimal... operands) {
-		return operands[0].pow(_pow);
+		return operands[0].pow(_pow, CONTEXT);
 	}
 	
 	@Override

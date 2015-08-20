@@ -2,6 +2,8 @@ package com.chunkr.expressions.operations.unary;
 
 import java.math.BigDecimal;
 
+import com.chunkr.expressions.operations.UnaryOperation;
+
 public class Neg extends UnaryOperation {
 	
 	@Override

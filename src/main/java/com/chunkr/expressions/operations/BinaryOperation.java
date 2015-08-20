@@ -1,6 +1,5 @@
-package com.chunkr.expressions.operations.binary;
+package com.chunkr.expressions.operations;
 
-import com.chunkr.expressions.operations.Operation;
 
 
 /**
