@@ -1,4 +1,4 @@
-package com.chunkr.expressions;
+package com.chunkr.expressions.operations;
 import java.math.BigDecimal;
 
 /**

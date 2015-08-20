@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Population;
+import com.chunkr.genetics.chromosomes.Chromosome;
 import com.chunkr.genetics.selectors.TournamentSelector;
 
 public class BitWeightConfigurationTest {

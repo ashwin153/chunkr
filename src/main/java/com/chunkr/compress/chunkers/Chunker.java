@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.chunkers;
 
 import org.apache.commons.lang3.StringUtils;
 

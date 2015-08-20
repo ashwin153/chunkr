@@ -2,8 +2,6 @@ package com.chunkr.expressions.operations.nullary;
 
 import java.math.BigDecimal;
 
-import com.chunkr.expressions.operations.NullaryOperation;
-
 public class Constant extends NullaryOperation {
 	
 	private BigDecimal _value;

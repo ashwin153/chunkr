@@ -6,8 +6,6 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.chunkr.expressions.operations.unary.Abs;
-
 public class AbsTest {
 	
 	@Test

@@ -1,8 +1,7 @@
 package com.chunkr.compress;
 
+import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.expressions.Expression;
-
-
 
 /**
  * This class represents a compressed archive. Archives contain decompression

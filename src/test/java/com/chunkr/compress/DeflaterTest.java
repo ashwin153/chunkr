@@ -9,7 +9,9 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import com.chunkr.compress.encoders.KryoEncoder;
 import com.chunkr.compress.regressors.LeastSquaresRegressor;
+import com.chunkr.compress.regressors.Regressor;
 
 public class DeflaterTest {
 
@@ -18,7 +20,7 @@ public class DeflaterTest {
 		ByteArrayInputStream input = new ByteArrayInputStream("Is".getBytes());
 		FileOutputStream output = new FileOutputStream(new File("./archive.mad"));
 		Regressor regressor = new LeastSquaresRegressor(9);
-		Encoder encoder = new Encoder();
+		KryoEncoder encoder = new KryoEncoder();
 		
 		Deflater deflater = new Deflater(6, input, output, regressor, encoder);
 		deflater.run();

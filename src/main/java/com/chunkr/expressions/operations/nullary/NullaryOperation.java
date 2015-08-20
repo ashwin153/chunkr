@@ -1,6 +1,7 @@
-package com.chunkr.expressions.operations;
+package com.chunkr.expressions.operations.nullary;
 
-import com.chunkr.expressions.Operation;
+import com.chunkr.expressions.operations.Operation;
+
 
 /**
  * Nullary operations take no arguments, but still produce outputs; nullary

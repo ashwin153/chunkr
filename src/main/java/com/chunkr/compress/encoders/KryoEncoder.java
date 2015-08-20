@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.encoders;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -9,6 +9,7 @@ import java.util.zip.InflaterInputStream;
 
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
+import com.chunkr.compress.Archive;
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
 import com.chunkr.expressions.Expression;
@@ -38,11 +39,11 @@ import com.esotericsoftware.kryo.serializers.FieldSerializer;
  * @author ashwin
  * 
  */
-public class Encoder {
+public class KryoEncoder implements Encoder {
 
 	private Kryo _kryo;
 	
-	public Encoder() {
+	public KryoEncoder() {
 		_kryo = new Kryo();
 		
 		// Register all the different types of operations; this makes it so that

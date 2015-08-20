@@ -1,8 +1,5 @@
 package com.chunkr.compress.chunkers;
 
-import com.chunkr.compress.Chunker;
-import com.chunkr.compress.chunkers.ModifiedChunker;
-import com.chunkr.compress.chunkers.StandardChunker;
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Stack;
 
+import com.chunkr.expressions.operations.Operation;
 import com.chunkr.expressions.operations.nullary.Variable;
 
 /**

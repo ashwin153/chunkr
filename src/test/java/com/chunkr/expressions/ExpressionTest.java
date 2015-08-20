@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import com.chunkr.expressions.Expression;
-import com.chunkr.expressions.Operation;
+import com.chunkr.expressions.operations.Operation;
 import com.chunkr.expressions.operations.nullary.Variable;
 
 import edu.umd.cs.mtc.MultithreadedTestCase;

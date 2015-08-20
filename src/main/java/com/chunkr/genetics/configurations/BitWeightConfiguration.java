@@ -6,11 +6,10 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chunkr.compress.Chunker;
+import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
-import com.chunkr.genetics.Chromosome;
-import com.chunkr.genetics.Configuration;
+import com.chunkr.genetics.chromosomes.Chromosome;
 import com.chunkr.genetics.chromosomes.DoubleChromosome;
 
 public class BitWeightConfiguration extends Configuration<List<Double>, Double> {

@@ -1,7 +1,9 @@
-package com.chunkr.compress;
+package com.chunkr.compress.encoders;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.chunkr.compress.Archive;
+import com.chunkr.compress.encoders.KryoEncoder;
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.api.VmOptions;
@@ -19,14 +21,14 @@ import com.google.caliper.api.VmOptions;
 @VmOptions("-server")
 public class EncoderBenchmark {
 
-	private Encoder _encoder;
+	private KryoEncoder _encoder;
 	private Archive _archive;
 	private InputStream _input;
 	private OutputStream _output;
 	
 	@BeforeExperiment
 	public void setUp() throws Exception {
-		_encoder = new Encoder();
+		_encoder = new KryoEncoder();
 	}
 	
 	@Benchmark

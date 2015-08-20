@@ -5,8 +5,12 @@ import java.io.OutputStream;
 
 import org.apache.log4j.Logger;
 
+import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
+import com.chunkr.compress.encoders.Encoder;
+import com.chunkr.compress.evaluators.Evaluator;
+import com.chunkr.compress.regressors.Regressor;
 import com.chunkr.expressions.Expression;
 
 public class Deflater implements Runnable {
@@ -15,16 +19,22 @@ public class Deflater implements Runnable {
 
 	private Regressor _regressor;
 	private Encoder _encoder;
+	private Evaluator _evaluator;
+	
 	private InputStream _input;
 	private OutputStream _output;
 	private int _chunkSize;
 	
-	public Deflater(int chunkSize, InputStream input, OutputStream output, Regressor regressor, Encoder encoder) {
+	public Deflater(int chunkSize, InputStream input, OutputStream output,
+			Regressor regressor, Encoder encoder, Evaluator evaluator) {
+		
 		_input = input;
 		_output = output;
+		
 		_chunkSize = chunkSize;
 		_regressor = regressor;
 		_encoder = encoder;
+		_evaluator = evaluator;
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
-package com.chunkr.expressions.operations;
+package com.chunkr.expressions.operations.unary;
 
-import com.chunkr.expressions.Operation;
+import com.chunkr.expressions.operations.Operation;
+
 
 /**
  * Unary operations take a single argument and produce a single output. Some

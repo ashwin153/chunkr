@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.chunkr.compress.Chunker;
-
 public class ModifiedChunker extends Chunker {
 	
 	private List<Double> _weights;

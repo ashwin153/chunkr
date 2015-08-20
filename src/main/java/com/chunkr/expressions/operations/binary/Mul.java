@@ -2,8 +2,6 @@ package com.chunkr.expressions.operations.binary;
 
 import java.math.BigDecimal;
 
-import com.chunkr.expressions.operations.BinaryOperation;
-
 public class Mul extends BinaryOperation {
 	
 	@Override

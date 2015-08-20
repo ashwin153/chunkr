@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.regressors;
 
 import com.chunkr.expressions.Expression;
 

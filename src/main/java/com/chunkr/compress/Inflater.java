@@ -7,7 +7,9 @@ import java.math.RoundingMode;
 
 import org.apache.log4j.Logger;
 
+import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.compress.chunkers.StandardChunker;
+import com.chunkr.compress.encoders.Encoder;
 import com.chunkr.expressions.Expression;
 
 public class Inflater implements Runnable {

@@ -3,9 +3,8 @@ package com.chunkr.genetics.configurations;
 import java.math.BigDecimal;
 
 import com.chunkr.expressions.Expression;
-import com.chunkr.expressions.Operation;
-import com.chunkr.genetics.Chromosome;
-import com.chunkr.genetics.Configuration;
+import com.chunkr.expressions.operations.Operation;
+import com.chunkr.genetics.chromosomes.Chromosome;
 
 public class CurveFittingConfiguration extends Configuration<Expression, Operation> {
 

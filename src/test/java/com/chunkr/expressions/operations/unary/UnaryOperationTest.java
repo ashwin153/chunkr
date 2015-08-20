@@ -1,11 +1,11 @@
-package com.chunkr.expressions.operations;
+package com.chunkr.expressions.operations.unary;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.chunkr.expressions.operations.UnaryOperation;
+import com.chunkr.expressions.operations.unary.UnaryOperation;
 
 public class UnaryOperationTest {
 

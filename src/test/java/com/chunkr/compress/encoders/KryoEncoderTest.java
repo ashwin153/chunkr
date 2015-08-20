@@ -1,8 +1,8 @@
-package com.chunkr.compress;
+package com.chunkr.compress.encoders;
 
 import org.junit.Test;
 
-public class EncoderTest {
+public class KryoEncoderTest {
 
 	@Test
 	public void testRead() {
