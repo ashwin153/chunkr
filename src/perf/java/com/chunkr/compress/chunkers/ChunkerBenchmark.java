@@ -17,7 +17,7 @@ import com.google.caliper.api.VmOptions;
 public class ChunkerBenchmark {
 	
 	@Param({ "5", "6", "7" })
-	private int _chunkSize;
+	private byte _chunkSize;
 	
 	@Param
 	private Method _method;
@@ -30,18 +30,18 @@ public class ChunkerBenchmark {
 		
 		STANDARD {
 			@Override
-			public Chunker getChunker(int chunkSize) {
+			public Chunker getChunker(byte chunkSize) {
 				return new StandardChunker(chunkSize);
 			}
 		},
 		
 		MODIFIED {
-			@Override public Chunker getChunker(int chunkSize) {
+			@Override public Chunker getChunker(byte chunkSize) {
 				return new ModifiedChunker(chunkSize);
 			}
 		};
 		
-		abstract public Chunker getChunker(int chunkSize);
+		abstract public Chunker getChunker(byte chunkSize);
 	}
 	
 	@BeforeExperiment
