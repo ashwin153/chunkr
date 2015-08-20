@@ -11,9 +11,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class Chunker {
 
-	private byte _chunkSize; 
+	private int _chunkSize; 
 	
-	public Chunker(byte chunkSize) {
+	public Chunker(int chunkSize) {
 		_chunkSize = chunkSize;
 	}
 	
@@ -25,7 +25,7 @@ public abstract class Chunker {
 	 * 
 	 * @return chunk size
 	 */
-	public byte getChunkSize() {
+	public int getChunkSize() {
 		return _chunkSize;
 	}
 	

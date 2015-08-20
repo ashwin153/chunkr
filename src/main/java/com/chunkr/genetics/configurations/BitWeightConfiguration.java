@@ -26,7 +26,7 @@ public class BitWeightConfiguration extends Configuration<List<Double>, Double> 
 
 	@Override
 	public BigDecimal getFitness(Chromosome<List<Double>, Double> chromosome) {
-		Chunker standard = new StandardChunker((byte) 8);
+		Chunker standard = new StandardChunker(8);
 		Chunker modified = new ModifiedChunker(chromosome.getGenome());
 		boolean[] bits = modified.unchunk(_chunks);
 		int[] outputs  = standard.chunk(bits);

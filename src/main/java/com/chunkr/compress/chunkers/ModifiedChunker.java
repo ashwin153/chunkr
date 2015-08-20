@@ -15,7 +15,7 @@ public class ModifiedChunker extends Chunker {
 	 * 
 	 * @param chunkSize
 	 */
-	public ModifiedChunker(byte chunkSize) {
+	public ModifiedChunker(int chunkSize) {
 		super(chunkSize);
 		
 		_weights = new ArrayList<Double>(chunkSize);
@@ -24,7 +24,7 @@ public class ModifiedChunker extends Chunker {
 	}
 	
 	public ModifiedChunker(List<Double> weights) {
-		super((byte) weights.size());
+		super(weights.size());
 		_weights = weights;
 	}
 	
