@@ -1,12 +1,16 @@
+# Generated
 /target/
 /bin/
-.project
-.classpath
-.settings
-.texlipse
-.DS_Store
 *.log
 *.aux
 *.out
 *.toc
-/.apt_generated
+
+# Eclipse 
+.project
+.classpath
+.settings
+.texlipse
+
+# Mac
+.DS_Store
