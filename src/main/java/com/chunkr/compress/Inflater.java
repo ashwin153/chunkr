@@ -2,15 +2,13 @@ package com.chunkr.compress;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import org.apache.log4j.Logger;
 
 import com.chunkr.compress.chunkers.Chunker;
 import com.chunkr.compress.chunkers.StandardChunker;
 import com.chunkr.compress.encoders.Encoder;
-import com.chunkr.expressions.Expression;
+import com.chunkr.compress.evaluators.Evaluator;
 
 public class Inflater implements Runnable {
 	
@@ -19,32 +17,29 @@ public class Inflater implements Runnable {
 	private InputStream _input;
 	private OutputStream _output;
 	private Encoder _encoder;
+	private Evaluator _evaluator;
 	
-	public Inflater(InputStream input, OutputStream output, Encoder encoder) {
+	public Inflater(InputStream input, OutputStream output, Encoder encoder, Evaluator evaluator) {
 		_input = input;
 		_output = output;
+		
 		_encoder = encoder;
+		_evaluator = evaluator;
 	}
 	
 	@Override
 	public void run() {
 		try {
-			// Step 1: Decode the input stream into an archive
+			// Decode the input stream into an archive and then evaluate
+			// contained expression over the length of the archive.
 			Archive archive = _encoder.read(_input);
+			int[] chunks = _evaluator.eval(archive.getLength(), archive.getExpression());
 			
-			// Step 2: Evaluate the input stream at each point in the file
-			int[] chunks = new int[archive.getLength()];
-			Expression expression = archive.getExpression();
-			for(int i = 0; i < chunks.length; i++) {
-				BigDecimal value = expression.eval(BigDecimal.valueOf(i));
-				BigDecimal round = value.setScale(0, RoundingMode.HALF_UP);
-				chunks[i] = round.intValue();
-			}
-			
-			// Step 3: Decode and covert the binary versions of the chunks into bytes
+			// Convert the chunks to bits using modified chunking, then covert
+			// them into bytes (as ints) using standard chunking. Then write
+			// these bytes to the specified output stream.
 			Chunker standard = new StandardChunker(8);
 			Chunker modified = archive.getChunker();
-			
 			boolean[] unchunks = modified.unchunk(chunks);
 			int[] data = standard.chunk(unchunks);
 			

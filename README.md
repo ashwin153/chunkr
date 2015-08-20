@@ -1,10 +1,5 @@
-# Chunkr
-Curve Fitting + Chunking + Compression
+## Chunkr
+Curve Fitting + Chunking + Compression; introducing the .mad (short for .madavan) file format.
 
-# Contributors
+## Contributors
 - Ashwin Madavan (Lead Developer)
-
-# Git Code Standards
-- Create a branch for every new feature; delete unused branches
-- All code must have test coverage
-- All merge commits must be reviewed by Ashwin
