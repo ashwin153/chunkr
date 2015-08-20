@@ -35,17 +35,17 @@ public class Population<T, G> {
 		_config = config;
 		_selector = selector;
 		
+		// Create parallelized tasks for evaluating the fitness of chromosomes
+		List<Callable<BigDecimal>> tasks = new ArrayList<Callable<BigDecimal>>();
+		for (final Chromosome<T, G> chromosome : _chromosomes)
+			tasks.add(new Callable<BigDecimal>() {
+				@Override
+				public BigDecimal call() throws Exception {
+					return _config.getFitness(chromosome);
+				}
+			});
+		
 		try {
-			// Create parallelized tasks for evaluating the fitness of chromosomes
-			List<Callable<BigDecimal>> tasks = new ArrayList<Callable<BigDecimal>>();
-			for(final Chromosome<T, G> chromosome : _chromosomes)
-				tasks.add(new Callable<BigDecimal>() {
-					@Override
-					public BigDecimal call() throws Exception {
-						return _config.getFitness(chromosome);
-					}
-				});
-			
 			// Evaluate the fitness of all chromosomes and retrieve the results
 			ExecutorService executor = Executors.newCachedThreadPool();
 			_fitnesses = new ArrayList<BigDecimal>();
