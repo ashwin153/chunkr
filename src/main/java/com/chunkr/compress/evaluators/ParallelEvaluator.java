@@ -11,6 +11,16 @@ import java.util.concurrent.Future;
 
 import com.chunkr.expressions.Expression;
 
+/**
+ * ParallelEvaluators attempt to reduce the performance overhead of expression
+ * evaluation by taking advantage of parallel processing. ParallelEvaluators
+ * spawn multiple threads that concurrently evaluate the function at various
+ * points. Because expression evaluation is thread-safe, this is significantly
+ * faster than sequential evaluation.
+ * 
+ * @author ashwin
+ * @see Evaluator
+ */
 public class ParallelEvaluator implements Evaluator {
 
 	@Override

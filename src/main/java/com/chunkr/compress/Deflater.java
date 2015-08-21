@@ -19,6 +19,18 @@ import com.chunkr.genetics.configurations.BitWeightConfiguration;
 import com.chunkr.genetics.selectors.Selector;
 import com.chunkr.genetics.selectors.TournamentSelector;
 
+/**
+ * Deflaters are runnable deflation tasks that are used to compress data.
+ * Deflaters perform the following procedure (1) convert the input bytes to
+ * binary using standard chunking, (2) convert the binary to chunks using
+ * modified chunking, (3) fit an expression to the chunks using a regressor, (4)
+ * determine optimal bit weights to maximize compression accuracy by evaluating
+ * the expression and running it through a genetic algorithm, (5) construct and
+ * encoder an archive and write the bytes to an output stream using an encoder.
+ * 
+ * @author ashwin
+ * @see Inflater
+ */
 public class Deflater implements Runnable {
 
 	private static final Logger LOGGER = Logger.getLogger(Deflater.class);

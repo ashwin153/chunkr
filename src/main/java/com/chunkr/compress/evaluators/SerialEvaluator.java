@@ -5,6 +5,15 @@ import java.math.RoundingMode;
 
 import com.chunkr.expressions.Expression;
 
+/**
+ * SerialEvaluators sequentially evaluate the specified expression at each point
+ * in the file. While sequential evaluation is significantly slower than
+ * parallel evaluation, it is useful in case parallel evaluation is not
+ * possible.
+ * 
+ * @author ashwin
+ * @see Evaluator
+ */
 public class SerialEvaluator implements Evaluator {
 
 	@Override

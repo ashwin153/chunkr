@@ -2,6 +2,14 @@ package com.chunkr.compress.chunkers;
 
 import java.util.Arrays;
 
+/**
+ * Implementation of the standard chunking algorithm. The standard chunking
+ * algorithm groups each "chunkSize" block of bits together. This is what
+ * computers use to group bits into bytes.
+ * 
+ * @author ashwin
+ * @see Chunker
+ */
 public class StandardChunker extends Chunker {
 
 	public StandardChunker(int chunkSize) {

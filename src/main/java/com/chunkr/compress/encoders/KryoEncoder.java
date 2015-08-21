@@ -37,7 +37,7 @@ import com.esotericsoftware.kryo.serializers.FieldSerializer;
  * to increase performance and allocation.
  * 
  * @author ashwin
- * 
+ * @see Encoder
  */
 public class KryoEncoder implements Encoder {
 

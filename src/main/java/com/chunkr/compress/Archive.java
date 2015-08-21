@@ -2,6 +2,7 @@ package com.chunkr.compress;
 
 import java.util.List;
 
+import com.chunkr.compress.encoders.Encoder;
 import com.chunkr.expressions.Expression;
 
 /**
@@ -10,6 +11,7 @@ import com.chunkr.expressions.Expression;
  * Archives are immutable.
  * 
  * @author ashwin
+ * @see Encoder
  */
 public class Archive {
 

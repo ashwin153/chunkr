@@ -12,6 +12,16 @@ import com.chunkr.compress.chunkers.StandardChunker;
 import com.chunkr.compress.encoders.Encoder;
 import com.chunkr.compress.evaluators.Evaluator;
 
+/**
+ * Inflaters are runnable inflation tasks. Inflaters (1) read an archive from an
+ * input stream using an encoder, (2) evaluate the expression over the length of
+ * the archive using an evaluator, (3) convert these chunks to binary using
+ * modified chunking, (4) convert the binary to bytes using standard chunking,
+ * (5) write the bytes to an output stream.
+ * 
+ * @author ashwin
+ * @see Deflater
+ */
 public class Inflater implements Runnable {
 	
 	private static final Logger LOGGER = Logger.getLogger(Inflater.class);

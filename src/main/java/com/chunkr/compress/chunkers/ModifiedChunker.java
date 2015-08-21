@@ -4,25 +4,40 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Implementation of the special "modified" chunking algorithm. The modified
+ * chunking exploits the locality of bits to recover original unchunked data
+ * even if the chunked values are altered slightly.
+ * 
+ * @author ashwin
+ * @see Chunker
+ */
 public class ModifiedChunker extends Chunker {
 	
 	private List<Double> _weights;
 	
 	/**
 	 * Constructs a new ModifiedChunker using the default bit weightings. By
-	 * default, the weight of an index is equal to the inverse of its index
-	 * (more significant bits are less likely to change).
+	 * default, the bit weights are uniform; therefore, the most significant bit
+	 * will have the same weight as the least significant bit.
 	 * 
-	 * @param chunkSize
+	 * @param chunkSize size of chunks
 	 */
 	public ModifiedChunker(int chunkSize) {
 		super(chunkSize);
 		
 		_weights = new ArrayList<Double>(chunkSize);
 		for(int i = 0; i < chunkSize; i++)
-			_weights.add(1.0 / (i + 1.50));
+			_weights.add(1.0);
 	}
 	
+	/**
+	 * Constructs a new ModifiedChunker using the specified weights. This
+	 * enables us to determine the optimal set of bit weights to recover as much
+	 * of the original data as possible.
+	 * 
+	 * @param weights bit weights
+	 */
 	public ModifiedChunker(List<Double> weights) {
 		super(weights.size());
 		_weights = weights;

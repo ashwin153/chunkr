@@ -29,7 +29,7 @@ import com.chunkr.expressions.operations.unary.Sin;
  * specified in the scheme below.
  * 
  * @author ashwin
- * 
+ * @see Encoder
  */
 public class CustomEncoder implements Encoder {
 	

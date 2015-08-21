@@ -31,14 +31,15 @@ public abstract class Chunker {
 	
 	/**
 	 * Chunks an array of input bits into integer values.
-	 * @param bits
+	 * 
+	 * @param bits input bits
 	 * @return chunked integers
 	 */
 	abstract public int[] chunk(boolean[] bits);
 	
 	/**
 	 * Unchunks an array of chunked integers into bits.
-	 * @param chunks
+	 * @param chunks input chunks
 	 * @return unchunked bits
 	 */
 	abstract public boolean[] unchunk(int[] chunks);
@@ -48,7 +49,7 @@ public abstract class Chunker {
 	 * equal to chunkSize. The bits are returned from most significant to least
 	 * significant.
 	 * 
-	 * @param value
+	 * @param value integer value
 	 * @return unchunked bits
 	 */
 	public final boolean[] unchunk(int value) {
