@@ -1,5 +1,7 @@
 package com.chunkr.compress;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
@@ -44,14 +46,25 @@ public class Inflater implements Runnable {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 */
-	public Inflater(InputStream input, OutputStream output, Properties props)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public Inflater(InputStream input, OutputStream output, String path)
+			throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		
 		_input = input;
 		_output = output;
 		
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(path);
+		props.load(fis);
+		fis.close();
+		
 		_encoder = (Encoder) Class.forName(props.getProperty("inflater.encoder")).newInstance();
 		_evaluator = (Evaluator) Class.forName(props.getProperty("inflater.evaluator")).newInstance();
+	}
+	
+	public Inflater(InputStream input, OutputStream output) 
+			throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		
+		this(input, output, "./src/main/resources/inflater.properties");
 	}
 	
 	@Override

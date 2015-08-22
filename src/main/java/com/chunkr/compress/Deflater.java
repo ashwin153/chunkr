@@ -1,5 +1,7 @@
 package com.chunkr.compress;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -56,21 +58,32 @@ public class Deflater implements Runnable {
 	 * 
 	 * @param input input stream
 	 * @param output output stream
-	 * @param props properties
+	 * @param path path to properties file
 	 * @throws InstantiationException invalid properties file
 	 * @throws IllegalAccessException invalid properties file
 	 * @throws ClassNotFoundException invalid properties file
 	 */
-	public Deflater(InputStream input, OutputStream output, Properties props)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public Deflater(InputStream input, OutputStream output, String path)
+			throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		
 		_input = input;
 		_output = output;
+		
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(path);
+		props.load(new FileInputStream(path));
+		fis.close();
 		
 		_encoder = (Encoder) Class.forName(props.getProperty("deflater.encoder")).newInstance();
 		_chunkSize = Integer.valueOf(props.getProperty("deflater.size"));
 		_regressor = (Regressor) Class.forName(props.getProperty("deflater.regressor")).newInstance();
 		_evaluator = (Evaluator) Class.forName(props.getProperty("deflater.evaluator")).newInstance();
+	}
+	
+	public Deflater(InputStream input, OutputStream output)
+			throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		this(input, output, "./src/main/resources/deflater.properties");
 	}
 	
 	@Override
