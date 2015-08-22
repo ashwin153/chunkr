@@ -11,7 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import com.chunkr.genetics.chromosomes.Chromosome;
-import com.chunkr.genetics.configurations.Configuration;
 import com.chunkr.genetics.selectors.Selector;
 
 public class Population<T, G> {

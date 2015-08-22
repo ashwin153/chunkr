@@ -1,6 +1,6 @@
 package com.chunkr.genetics.chromosomes;
 
-import com.chunkr.genetics.configurations.Configuration;
+import com.chunkr.genetics.Configuration;
 
 public interface Chromosome<T, G> {
 

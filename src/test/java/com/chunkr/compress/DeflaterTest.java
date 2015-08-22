@@ -6,15 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Arrays;
+import java.util.Properties;
 
 import org.junit.Test;
-
-import com.chunkr.compress.encoders.CustomEncoder;
-import com.chunkr.compress.encoders.Encoder;
-import com.chunkr.compress.evaluators.Evaluator;
-import com.chunkr.compress.evaluators.ParallelEvaluator;
-import com.chunkr.compress.regressors.LeastSquaresRegressor;
-import com.chunkr.compress.regressors.Regressor;
 
 
 public class DeflaterTest {
@@ -23,18 +17,17 @@ public class DeflaterTest {
 	public void testDeflate() throws Exception {		
 		ByteArrayInputStream input = new ByteArrayInputStream("Is".getBytes());
 		FileOutputStream output = new FileOutputStream(new File("./archive.mad"));
-		
-		Regressor regressor = new LeastSquaresRegressor(6);
-		Encoder encoder = new CustomEncoder();
-		Evaluator evaluator = new ParallelEvaluator();
-		
-		Deflater deflater = new Deflater(6, input, output, regressor, encoder, evaluator);
+		Properties props = new Properties();
+		props.load(new FileInputStream("./src/main/resources/deflater.properties"));
+		props.load(new FileInputStream("./src/main/resources/inflater.properties"));
+
+		Deflater deflater = new Deflater(input, output, props);
 		deflater.run();
 		output.close();
 		
 		FileInputStream fis = new FileInputStream(new File("./archive.mad"));
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		Inflater inflater = new Inflater(fis, baos, encoder, evaluator);
+		Inflater inflater = new Inflater(fis, baos, props);
 		inflater.run();
 		
 		System.out.println(Arrays.toString("Is".getBytes()));

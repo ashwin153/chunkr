@@ -1,14 +1,12 @@
 package com.chunkr.expressions.operations;
 
-
-
 /**
  * Unary operations take a single argument and produce a single output. Some
  * examples of unary operations are the trigonometric functions and absolute
  * values.
  * 
  * @author ashwin
- * 
+ * @see UnaryOperation
  */
 public abstract class UnaryOperation implements Operation {
 

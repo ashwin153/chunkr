@@ -1,4 +1,5 @@
 package com.chunkr.expressions.operations;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -10,7 +11,9 @@ import java.math.RoundingMode;
  * outputs on the real numbers (codomain subset of (-inf, +inf)).
  * 
  * @author ashwin
- * 
+ * @see NullaryOperation
+ * @see UnaryOperation
+ * @see BinaryOperation
  */
 public interface Operation {
 	

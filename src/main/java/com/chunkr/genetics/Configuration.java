@@ -1,10 +1,9 @@
-package com.chunkr.genetics.configurations;
+package com.chunkr.genetics;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chunkr.genetics.Population;
 import com.chunkr.genetics.chromosomes.Chromosome;
 import com.chunkr.genetics.selectors.Selector;
 

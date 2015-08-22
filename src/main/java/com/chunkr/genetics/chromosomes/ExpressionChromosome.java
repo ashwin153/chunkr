@@ -2,7 +2,7 @@ package com.chunkr.genetics.chromosomes;
 
 import com.chunkr.expressions.Expression;
 import com.chunkr.expressions.operations.Operation;
-import com.chunkr.genetics.configurations.Configuration;
+import com.chunkr.genetics.Configuration;
 
 public class ExpressionChromosome implements Chromosome<Expression, Operation> {
 

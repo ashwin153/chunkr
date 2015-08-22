@@ -14,6 +14,7 @@ import com.chunkr.expressions.operations.nullary.Variable;
  * using a stack.
  * 
  * @author ashwin
+ * @see Operation
  */
 public class Expression {
 	

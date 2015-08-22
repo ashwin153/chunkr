@@ -17,18 +17,12 @@ import com.chunkr.expressions.operations.unary.Pow;
 
 public class LeastSquaresRegressor implements Regressor {
 	
-	private int _degree;
-	
-	public LeastSquaresRegressor(int degree) {
-		_degree = degree;
-	}
-
 	@Override
 	public Expression fit(int[] chunks) {
 		Collection<WeightedObservedPoint> points = new ArrayList<WeightedObservedPoint>();
 		for(int i = 0; i < chunks.length; i++)
 			points.add(new WeightedObservedPoint(1.0, i, chunks[i]));
-		double[] coeffs = PolynomialCurveFitter.create(_degree).fit(points);
+		double[] coeffs = PolynomialCurveFitter.create(chunks.length - 4).fit(points);
 		
 		// Translate the coefficients into an evaluable expression
 		Variable x = new Variable('x');

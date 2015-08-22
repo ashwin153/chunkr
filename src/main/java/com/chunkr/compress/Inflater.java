@@ -3,6 +3,7 @@ package com.chunkr.compress;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
@@ -31,12 +32,26 @@ public class Inflater implements Runnable {
 	private Encoder _encoder;
 	private Evaluator _evaluator;
 	
-	public Inflater(InputStream input, OutputStream output, Encoder encoder, Evaluator evaluator) {
+	/**
+	 * Constructs a new Inflater that writes uncompressed versions of the bytes
+	 * in the specified input stream to bytes in the specified output stream
+	 * using the properties defined by the properties file.
+	 * 
+	 * @param input
+	 * @param output
+	 * @param props
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 */
+	public Inflater(InputStream input, OutputStream output, Properties props)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		
 		_input = input;
 		_output = output;
 		
-		_encoder = encoder;
-		_evaluator = evaluator;
+		_encoder = (Encoder) Class.forName(props.getProperty("inflater.encoder")).newInstance();
+		_evaluator = (Evaluator) Class.forName(props.getProperty("inflater.evaluator")).newInstance();
 	}
 	
 	@Override

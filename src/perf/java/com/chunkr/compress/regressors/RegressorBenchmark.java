@@ -41,14 +41,14 @@ public class RegressorBenchmark {
 		LEAST_SQUARES {
 			@Override
 			public Regressor getRegressor() {
-				return new LeastSquaresRegressor(50);
+				return new LeastSquaresRegressor();
 			}
 		},
 		
 		GENETIC {
 			@Override
 			public Regressor getRegressor() {
-				return new GeneticRegressor();
+				return new GeneticRegressorTest();
 			}
 		};
 		
