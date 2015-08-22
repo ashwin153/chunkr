@@ -48,7 +48,7 @@ public class RegressorBenchmark {
 		GENETIC {
 			@Override
 			public Regressor getRegressor() {
-				return new GeneticRegressorTest();
+				return new GeneticRegressor();
 			}
 		};
 		
