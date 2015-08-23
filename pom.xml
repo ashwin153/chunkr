@@ -32,7 +32,7 @@
 			<artifactId>commons-math3</artifactId>
 			<version>3.5</version>
 		</dependency>
-		
+
 		<!-- Logging Dependencies -->
 		<dependency>
 			<groupId>log4j</groupId>

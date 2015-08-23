@@ -40,7 +40,7 @@ import com.chunkr.genetics.selectors.TournamentSelector;
  * @see Inflater
  */
 public class Deflater implements Runnable {
-
+	
 	private static final Logger LOGGER = Logger.getLogger(Deflater.class);
 
 	private Regressor _regressor;
