@@ -1,9 +1,7 @@
-package com.chunkr.compress;
+package com.chunkr.compress.deflaters;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -13,6 +11,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chunkr.compress.Deflater;
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
 import com.chunkr.expressions.Expression;
@@ -20,10 +19,8 @@ import com.chunkr.expressions.Regressor;
 import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Configuration;
 import com.chunkr.genetics.Population;
-import com.chunkr.genetics.Selector;
 import com.chunkr.genetics.chromosomes.DoubleChromosome;
 import com.chunkr.genetics.selectors.TournamentSelector;
-
 
 /**
  * Compressor contains the logic that deflates and inflates sequences of bytes.
@@ -32,24 +29,16 @@ import com.chunkr.genetics.selectors.TournamentSelector;
  * 
  * @author ashwin
  */
-public class Compressor {
+public class ExpressionDeflater implements Deflater {
 		
 	private int _chunkSize;
 	private Regressor _regressor;
 	
-	public Compressor(int chunkSize, Regressor regressor) {
+	public ExpressionDeflater(int chunkSize, Regressor regressor) {
 		_chunkSize = chunkSize;
 		_regressor = regressor;
 	}
 	
-	/**
-	 * Deflates the bytes in the specified input stream and places the
-	 * compressed bytes into the specified output stream.
-	 * 
-	 * @param in input
-	 * @param out output
-	 * @throws IOException read/write error
-	 */
 	public void deflate(InputStream in, OutputStream out) throws IOException {
 		// Retrieve bytes from the input stream
 		int[] bytes = new int[in.available()];
@@ -64,49 +53,21 @@ public class Compressor {
 		int[] results  = expression.eval(0, chunks.length, 1);
 
 		WeightConfiguration config = new WeightConfiguration(bytes, results);
-		Selector selector = new TournamentSelector(10);
-		Population<List<Double>, Double> population = config.getRandomPopulation(1000, selector);
+		Population<List<Double>, Double> population = config.getRandomPopulation(1000, new TournamentSelector(10));
 		for(int i = 0; i < 100; i++)
 			population = population.evolve(0.02, 0.85, 0.05);
-		Chromosome<List<Double>, Double> best = population.getBestChromosomes(1).get(0);
+		List<Double> weights = population.getBestChromosomes(1).get(0).getGenome();
 		
 		// Write the archive to the specified object output stream
 		ObjectOutput output = new ObjectOutputStream(out);
 		output.writeByte(_chunkSize);
 		output.writeInt(chunks.length);
-		for(Double weight : best.getGenome())
+		
+		for(Double weight : weights)
 			output.writeDouble(weight);
+		
 		expression.writeExternal(output);
 		output.close();
-	}
-	
-	/**
-	 * Inflates the bytes in the specified input stream and places the
-	 * uncompressed bytes in the specified output stream.
-	 * 
-	 * @param in input
-	 * @param out output
-	 * @throws IOException read/write error
-	 * @throws ClassNotFoundException read error
-	 */
-	public static void inflate(InputStream in, OutputStream out) throws IOException, ClassNotFoundException {
-		// Read the archive from the specified object input stream
-		ObjectInput input = new ObjectInputStream(in);
-		int chunkSize = input.readByte();
-		int length = input.readInt();
-		List<Double> weights = new ArrayList<>(chunkSize);
-		for(int i = 0; i < chunkSize; i++)
-			weights.add(input.readDouble());
-		Expression expression = new Expression(null, null);
-		expression.readExternal(input);
-		input.close();
-		
-		// Evaluate the expression at each point in the file and ungroup the
-		// integer chunks back into bytes; write these bytes to stream
-		int[] results = expression.eval(0, length, 1);
-		int[] bytes = new StandardChunker(8).chunk(new ModifiedChunker(weights).unchunk(results));
-		for(int i = 0; i < bytes.length; i++)
-			out.write(bytes[i]);
 	}
 	
 	/**

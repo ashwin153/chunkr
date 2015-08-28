@@ -28,14 +28,6 @@ public class ExpressionTest {
 		TestFramework.runManyTimes(new MultithreadedExpressionTest(), 5);
 	}
 	
-	@Test
-	public void testEvalRange() {
-		Variable x = new Variable('x');
-		Expression expression = new Expression(x, Arrays.asList((Operation) x));
-		int[] chunks = new int[] { 0, 1, 2, 3 };
-		assertArrayEquals(chunks, expression.eval(0, chunks.length, 1));
-	}
-	
 	@SuppressWarnings({"deprecation", "unused"})
 	private class MultithreadedExpressionTest extends MultithreadedTestCase {
 		
@@ -62,6 +54,16 @@ public class ExpressionTest {
 		
 		public void thread4() {
 			assertEquals(BigDecimal.valueOf(+4), _e2.eval(BigDecimal.valueOf(+4)));
+		}
+		
+		public void thread5() {
+			int[] chunks = new int[] { 0, 1, 2, 3 };
+			assertArrayEquals(chunks, _e1.eval(0, chunks.length, 1));
+		}
+		
+		public void thread6() {
+			BigDecimal[] chunks = new BigDecimal[] { BigDecimal.ZERO, BigDecimal.ONE };
+			assertArrayEquals(chunks, _e1.eval(BigDecimal.ZERO, BigDecimal.valueOf(2), BigDecimal.ONE));
 		}
 	}
 	

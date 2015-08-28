@@ -7,21 +7,22 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import com.chunkr.compress.deflaters.ExpressionDeflater;
+import com.chunkr.compress.inflaters.ExpressionInflater;
 import com.chunkr.expressions.regressors.LeastSquaresRegressor;
 
 public class CompressorTest {
 
 	@Test
-	public void testDeflate() throws Exception {	
-		Compressor compressor = new Compressor(6, new LeastSquaresRegressor(7));
-		
+	public void testDeflate() throws Exception {			
 		// Deflate and inflate the data and see how different the data is; this
 		// test is more to see if the algorithm is working properly than
 		// anything else.
 		byte[] data = "Is".getBytes();
 		InputStream deflateIn = new ByteArrayInputStream(data);
 		ByteArrayOutputStream deflateOut = new ByteArrayOutputStream();
-		compressor.deflate(deflateIn, deflateOut);
+		Deflater deflater = new ExpressionDeflater(6, new LeastSquaresRegressor(7));
+		deflater.deflate(deflateIn, deflateOut);
 		deflateIn.close();
 		deflateOut.close();
 		
@@ -29,7 +30,8 @@ public class CompressorTest {
 		
 		InputStream inflateIn = new ByteArrayInputStream(deflateOut.toByteArray());
 		ByteArrayOutputStream inflateOut = new ByteArrayOutputStream();
-		Compressor.inflate(inflateIn, inflateOut);
+		Inflater inflater = new ExpressionInflater();
+		inflater.inflate(inflateIn, inflateOut);
 		
 		inflateIn.close();
 		inflateOut.close();
