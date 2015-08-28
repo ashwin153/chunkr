@@ -1,4 +1,4 @@
-package com.chunkr.compress;
+package com.chunkr.compress.compressors;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -7,22 +7,21 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.chunkr.compress.compressors.ExpressionCompressor;
-import com.chunkr.compress.inflaters.ExpressionInflater;
-import com.chunkr.expressions.regressors.LeastSquaresRegressor;
+import com.chunkr.compress.Compressor;
 
-public class CompressorTest {
+public class ExpressionCompressorTest {
 
 	@Test
-	public void testDeflate() throws Exception {			
+	public void testDeflate() throws Exception {	
+		Compressor compressor = new ExpressionCompressor();
+		
 		// Deflate and inflate the data and see how different the data is; this
 		// test is more to see if the algorithm is working properly than
 		// anything else.
 		byte[] data = "Is".getBytes();
 		InputStream deflateIn = new ByteArrayInputStream(data);
 		ByteArrayOutputStream deflateOut = new ByteArrayOutputStream();
-		Deflater deflater = new ExpressionCompressor(6, new LeastSquaresRegressor(7));
-		deflater.deflate(deflateIn, deflateOut);
+		compressor.deflate(deflateIn, deflateOut, 6);
 		deflateIn.close();
 		deflateOut.close();
 		
@@ -30,8 +29,7 @@ public class CompressorTest {
 		
 		InputStream inflateIn = new ByteArrayInputStream(deflateOut.toByteArray());
 		ByteArrayOutputStream inflateOut = new ByteArrayOutputStream();
-		Inflater inflater = new ExpressionInflater();
-		inflater.inflate(inflateIn, inflateOut);
+		compressor.inflate(inflateIn, inflateOut);
 		
 		inflateIn.close();
 		inflateOut.close();

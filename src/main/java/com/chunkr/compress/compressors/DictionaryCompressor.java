@@ -9,15 +9,13 @@ import com.chunkr.compress.Compressor;
 public class DictionaryCompressor implements Compressor {
 
 	@Override
-	public void deflate(InputStream input, OutputStream output, int chunkSize)
-			throws IOException {
+	public void deflate(InputStream input, OutputStream output, int chunkSize) throws IOException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void inflate(InputStream input, OutputStream output)
-			throws IOException, ClassNotFoundException {
+	public void inflate(InputStream input, OutputStream output) throws IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		
 	}
