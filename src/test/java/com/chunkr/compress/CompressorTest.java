@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.chunkr.compress.deflaters.ExpressionDeflater;
+import com.chunkr.compress.compressors.ExpressionCompressor;
 import com.chunkr.compress.inflaters.ExpressionInflater;
 import com.chunkr.expressions.regressors.LeastSquaresRegressor;
 
@@ -21,7 +21,7 @@ public class CompressorTest {
 		byte[] data = "Is".getBytes();
 		InputStream deflateIn = new ByteArrayInputStream(data);
 		ByteArrayOutputStream deflateOut = new ByteArrayOutputStream();
-		Deflater deflater = new ExpressionDeflater(6, new LeastSquaresRegressor(7));
+		Deflater deflater = new ExpressionCompressor(6, new LeastSquaresRegressor(7));
 		deflater.deflate(deflateIn, deflateOut);
 		deflateIn.close();
 		deflateOut.close();
