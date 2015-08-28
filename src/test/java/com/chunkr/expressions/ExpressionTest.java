@@ -1,12 +1,12 @@
 package com.chunkr.expressions;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.chunkr.expressions.Expression;
-import com.chunkr.expressions.operations.Operation;
 import com.chunkr.expressions.operations.nullary.Variable;
 
 import edu.umd.cs.mtc.MultithreadedTestCase;
@@ -26,6 +26,14 @@ public class ExpressionTest {
 	@Test
 	public void testEval() throws Throwable {
 		TestFramework.runManyTimes(new MultithreadedExpressionTest(), 5);
+	}
+	
+	@Test
+	public void testEvalRange() {
+		Variable x = new Variable('x');
+		Expression expression = new Expression(x, Arrays.asList((Operation) x));
+		int[] chunks = new int[] { 0, 1, 2, 3 };
+		assertArrayEquals(chunks, expression.eval(0, chunks.length, 1));
 	}
 	
 	@SuppressWarnings({"deprecation", "unused"})

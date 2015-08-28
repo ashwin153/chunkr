@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chunkr.genetics.chromosomes.Chromosome;
-import com.chunkr.genetics.selectors.Selector;
-
 public abstract class Configuration<T, G> {
 	
 	public Population<T, G> getRandomPopulation(int size, Selector selector) {
@@ -20,14 +17,14 @@ public abstract class Configuration<T, G> {
 	 * Returns a reference to a callable object that in turn returns the fitness
 	 * of this chromosome; this enables fitness calculations to be parallelized.
 	 * 
-	 * @return
+	 * @return fitness
 	 */
 	abstract public BigDecimal getFitness(Chromosome<T, G> chromosome);
 
 	/**
 	 * Returns a randomly selected gene.
 	 * 
-	 * @return
+	 * @return random gene
 	 */
 	abstract public G getRandomGene();
 	
@@ -37,13 +34,14 @@ public abstract class Configuration<T, G> {
 	 * less random than the output of the no-argument method.
 	 * 
 	 * @param context
-	 * @return
+	 * @return random gene influenced by context
 	 */
 	abstract public G getRandomGene(G context);
 	
 	/**
 	 * Returns a randomly selected chromosome.
-	 * @return
+	 * 
+	 * @return random chromosome
 	 */
 	abstract public Chromosome<T, G> getRandomChromosome();
 	

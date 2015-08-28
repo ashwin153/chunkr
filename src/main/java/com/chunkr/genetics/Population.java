@@ -10,9 +10,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import com.chunkr.genetics.chromosomes.Chromosome;
-import com.chunkr.genetics.selectors.Selector;
-
 public class Population<T, G> {
 
 	private List<BigDecimal> _fitnesses;
@@ -67,7 +64,7 @@ public class Population<T, G> {
 	 * chromosomes will be returned in ascending order (smallest fitness first).
 	 * 
 	 * @param size
-	 * @return
+	 * @return most fit chromosomes
 	 */
 	public List<Chromosome<T, G>> getBestChromosomes(int size) {
 		// Sort the permutation matrix; this allows us to find the best
@@ -99,7 +96,7 @@ public class Population<T, G> {
 	 * @param elitismRate
 	 * @param crossoverRate
 	 * @param mutationRate
-	 * @return
+	 * @return evolved population
 	 */
 	public Population<T, G> evolve(double elitismRate, double crossoverRate, double mutationRate) {
 		List<Chromosome<T, G>> next = new ArrayList<>(_chromosomes.size());

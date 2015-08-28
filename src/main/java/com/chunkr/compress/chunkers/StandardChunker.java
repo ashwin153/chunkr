@@ -2,6 +2,8 @@ package com.chunkr.compress.chunkers;
 
 import java.util.Arrays;
 
+import com.chunkr.compress.Chunker;
+
 /**
  * Implementation of the standard chunking algorithm. The standard chunking
  * algorithm groups each "chunkSize" block of bits together. This is what

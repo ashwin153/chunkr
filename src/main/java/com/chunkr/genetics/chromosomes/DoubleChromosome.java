@@ -3,6 +3,7 @@ package com.chunkr.genetics.chromosomes;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Configuration;
 
 public class DoubleChromosome implements Chromosome<List<Double>, Double> {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.chunkr.genetics.Selector;
+
 public class TournamentSelector implements Selector {
 
 	private int _tournamentSize;

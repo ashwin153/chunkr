@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.chunkr.compress.Chunker;
+
 /**
  * Implementation of the special "modified" chunking algorithm. The modified
  * chunking exploits the locality of bits to recover original unchunked data

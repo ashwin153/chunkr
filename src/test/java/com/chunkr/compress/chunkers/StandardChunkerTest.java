@@ -4,6 +4,8 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
+import com.chunkr.compress.Chunker;
+
 public class StandardChunkerTest {
 
 	@Test
