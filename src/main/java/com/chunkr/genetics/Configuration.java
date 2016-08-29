@@ -4,6 +4,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Configurations are used to parameterize a problem. They define how
+ * chromosomes and the genes that compose them are formed as well as how
+ * chromosome fitness is determined.
+ * 
+ * @author ashwin
+ * 
+ * @param <T>
+ * @param <G>
+ */
 public abstract class Configuration<T, G> {
 	
 	public Population<T, G> getRandomPopulation(int size, Selector selector) {

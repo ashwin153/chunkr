@@ -91,7 +91,7 @@ public class Population<T, G> {
 	 * Performs an evolution of this population using the specified rates for
 	 * elitism, crossover, and mutation. The evolution process involves
 	 * repeatedly selecting chromosomes, crossing them over, and mutating their
-	 * children.
+	 * children. This process MAXIMIZES fitness.
 	 * 
 	 * @param elitismRate
 	 * @param crossoverRate

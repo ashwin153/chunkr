@@ -16,68 +16,81 @@ import java.util.List;
 import com.chunkr.compress.Compressor;
 import com.chunkr.compress.chunkers.ModifiedChunker;
 import com.chunkr.compress.chunkers.StandardChunker;
-import com.chunkr.expressions.Expression;
-import com.chunkr.expressions.Regressor;
-import com.chunkr.expressions.regressors.LeastSquaresRegressor;
+import com.chunkr.curves.Expression;
+import com.chunkr.curves.Regressor;
+import com.chunkr.curves.exceptions.EvaluationException;
+import com.chunkr.curves.expressions.StackExpression;
+import com.chunkr.curves.regressors.DiscreteFourierRegressor;
 import com.chunkr.genetics.Chromosome;
 import com.chunkr.genetics.Configuration;
 import com.chunkr.genetics.Population;
-import com.chunkr.genetics.chromosomes.DoubleChromosome;
+import com.chunkr.genetics.chromosomes.VectorChromosome;
 import com.chunkr.genetics.selectors.TournamentSelector;
 
-/**
- * Compressor contains the logic that deflates and inflates sequences of bytes.
- * The compression algorithm relies on the chunking and curve fitting to produce
- * function representations of binary data.
- * 
- * @author ashwin
- */
 public class ExpressionCompressor implements Compressor {
 	
-	public void deflate(InputStream in, OutputStream out, int chunkSize) throws IOException {
+	/** The size of modified chunks. */
+	private static final int MCHUNK_SIZE = 5;
+	
+	/**
+	 * Deflates the bytes in the specified input stream and places the
+	 * compressed bytes into the specified output stream.
+	 * 
+	 * @param input input stream
+	 * @param output output stream
+	 * @param chunkSize size of chunks
+	 * @throws Exception read/write error
+	 */
+	@Override
+	public void deflate(InputStream in, OutputStream out) throws IOException, EvaluationException {
 		// Retrieve bytes from the input stream and retrieve properties
 		int[] bytes = new int[in.available()];
 		for(int i = 0; i < bytes.length; i++)
 			bytes[i] = in.read();
-		
+			
 		// Group the bytes together to produce integer chunks; regress the
 		// chunks into an expression and use it to determine the optimal
 		// parameters for modified unchunking using a genetic algorithm
-		int[] chunks = new ModifiedChunker(chunkSize).chunk(new StandardChunker(8).unchunk(bytes));
-		Regressor regressor = new LeastSquaresRegressor(chunks.length - 4);
+		int[] chunks = new ModifiedChunker(MCHUNK_SIZE).chunk(new StandardChunker(8).unchunk(bytes));
+		Regressor regressor = new DiscreteFourierRegressor();
 		Expression expression = regressor.fit(chunks);
 		int[] results  = expression.eval(0, chunks.length, 1);
 
-		WeightConfiguration config = new WeightConfiguration(chunkSize, bytes, results);
+		WeightConfiguration config = new WeightConfiguration(MCHUNK_SIZE, bytes, results);
 		Population<List<Double>, Double> population = config.getRandomPopulation(1000, new TournamentSelector(10));
 		for(int i = 0; i < 100; i++)
 			population = population.evolve(0.02, 0.85, 0.05);
-		List<Double> weights = population.getBestChromosomes(1).get(0).getGenome();
-		
+		List<Double> weights = population.getBestChromosomes(1).get(0).genome();
+			
 		// Write the archive to the specified object output stream
 		ObjectOutput output = new ObjectOutputStream(out);
-		output.writeByte(chunkSize);
+		output.writeByte(MCHUNK_SIZE);
 		output.writeInt(chunks.length);
-		
 		for(Double weight : weights)
 			output.writeDouble(weight);
-		
 		expression.writeExternal(output);
 		output.close();
 	}
-	
+
+	/**
+	 * Inflates the bytes in the specified input stream and places the
+	 * uncompressed bytes into the specified output stream.
+	 * 
+	 * @param input input stream
+	 * @param output output stream
+	 * @throws IOException read/write error
+	 * @throws ClassNotFoundException read error
+	 */
 	@Override
-	public void inflate(InputStream in, OutputStream out) throws IOException, ClassNotFoundException {
+	public void inflate(InputStream in, OutputStream out) throws IOException, ClassNotFoundException, EvaluationException {
 		// Read the archive from the specified object input stream
 		ObjectInput input = new ObjectInputStream(in);
 		int chunkSize = input.readByte();
 		int length = input.readInt();
-		
 		List<Double> weights = new ArrayList<>(chunkSize);
 		for(int i = 0; i < chunkSize; i++)
 			weights.add(input.readDouble());
-		
-		Expression expression = new Expression(null, null);
+		Expression expression = new StackExpression();
 		expression.readExternal(input);
 		input.close();
 		
@@ -113,7 +126,7 @@ public class ExpressionCompressor implements Compressor {
 		@Override
 		public BigDecimal getFitness(Chromosome<List<Double>, Double> chromosome) {
 			int[] bytes = new StandardChunker(8).chunk(new ModifiedChunker(
-					chromosome.getGenome()).unchunk(_chunks));
+					chromosome.genome()).unchunk(_chunks));
 			
 			// Fitness is the least squares difference between input and output
 			BigDecimal fitness = BigDecimal.ZERO;
@@ -144,12 +157,12 @@ public class ExpressionCompressor implements Compressor {
 		}
 
 		@Override
-		public DoubleChromosome getRandomChromosome() {
+		public VectorChromosome getRandomChromosome() {
 			List<Double> weights = new ArrayList<Double>(_chunkSize);
 			for(int i = 0; i < _chunkSize; i++)
 				weights.add(getRandomGene());
-			return new DoubleChromosome(weights);
+			return new VectorChromosome(weights);
 		}
-		
 	}
+	
 }

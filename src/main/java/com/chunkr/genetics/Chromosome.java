@@ -1,15 +1,31 @@
 package com.chunkr.genetics;
 
-
-public interface Chromosome<T, G> {
+/**
+ * Chromosomes define the crossover and mutation operators for a particular
+ * genome and gene type.
+ * 
+ * @author ashwin
+ * 
+ * @param <T> genome type
+ * @param <G> gene type
+ */
+public abstract class Chromosome<T, G> {
+	
+	private T _genome;
+	
+	public Chromosome(T genome) {
+		_genome = genome;
+	}
 
 	/**
 	 * Returns the genome of this chromosome. The genome is the physical object
 	 * that this chromosome represents.
 	 * 
-	 * @return
+	 * @return genome
 	 */
-	public T getGenome();
+	public T genome() {
+		return _genome;
+	}
 	
 	/**
 	 * Crosses over this chromosome with the specified mate using the specified
@@ -18,17 +34,17 @@ public interface Chromosome<T, G> {
 	 * 
 	 * @param mate
 	 * @param rate
-	 * @return
+	 * @return child
 	 */
-	public Chromosome<T, G> crossover(Chromosome<T, G> mate, double rate);
+	abstract public Chromosome<T, G> crossover(Chromosome<T, G> mate, double rate);
 	
 	/**
 	 * Mutates this chromosome with the specified rate. Mutation is destructive;
-	 * therefore, this chromosome should be changed by calls to mutate.
+	 * therefore, this chromosome can be changed by calls to mutate.
 	 * 
 	 * @param config
 	 * @param rate
 	 */
-	public void mutate(Configuration<T, G> config, double rate);
+	abstract public void mutate(Configuration<T, G> config, double rate);
 
 }
